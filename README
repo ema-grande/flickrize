@@ -1,0 +1,23 @@
+Use script to sign e resize photo to upload
+
+from folder $PWD = "/media/WD250GBCAC/Foto/Nikon D5000"
+
+use in terminal:
+
+cat upload.txt | while read num color pos;do ./toFlickr.sh $num $color $pos;done
+
+or run
+
+./flickerize.sh
+
+where upload.txt file structure is:
+#<photo path>			<sign color>		<sign position>
+2010/03/23/*15.JPG		W					BL
+2010/03/23/*20.JPG		B					BR
+2010/03/23/*31.JPG		W					BR
+2010/03/23/*59.JPG		W					BL
+
+where:
+<photo path> is relative photo path from flickerize.sh file
+<sign color> can be: "B" or "W"
+<sign position> can be: "BL" or "BR"
