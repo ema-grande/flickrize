@@ -1,23 +1,26 @@
-Use script to sign e resize photo to upload
+Flickerize is a collection of scripts to sign e resize photo to upload then on some photo sharing service!
+Optimized for flickr.com
 
-from folder $PWD = "/media/WD250GBCAC/Foto/Nikon D5000"
+after configured "upload.txt" file
 
-use in terminal:
+	where upload.txt file structure is:
+	#<photo path>				<sign color>		<sign position>
+	2010/03/23/DSC_0015.JPG		W					BL
+	2010/03/23/DSC_0020.JPG		B					BR
+	2010/03/23/DSC_0031.JPG		W					BR
+	2010/03/23/DSC_0059.JPG		W					BL
 
-cat upload.txt | while read num color pos;do ./toFlickr.sh $num $color $pos;done
+	where:
+	<photo path> is relative photo path from flickerize.sh file
+	<sign color> can be: "B" or "W"
+	<sign position> can be: "BL" or "BR"
+
+from flickerize.sh script folder use:
+
+	cat upload.txt | while read num color pos;do ./toFlickr.sh $num $color $pos;done
 
 or run
 
-./flickerize.sh
+	./flickerize.sh
 
-where upload.txt file structure is:
-#<photo path>			<sign color>		<sign position>
-2010/03/23/*15.JPG		W					BL
-2010/03/23/*20.JPG		B					BR
-2010/03/23/*31.JPG		W					BR
-2010/03/23/*59.JPG		W					BL
 
-where:
-<photo path> is relative photo path from flickerize.sh file
-<sign color> can be: "B" or "W"
-<sign position> can be: "BL" or "BR"
