@@ -1,11 +1,6 @@
 #!/bin/sh
 #Add signature to the photo.
 
-#TODO
-#Auto recognize photo dimension for better sign position
-#Auto recognize photo orientation for sign position
-#
-
 #Input vars
 #Source file
 ORIG="$1"
@@ -39,7 +34,7 @@ SIGNPOS="$BR"
 
 usage ()
 {
-	echo "usage -- $0 <photo sorce> <sign color> <sign pos> <photo orien>";
+	echo "usage -- $0 <photo sorce> <sign color> <sign pos>";
 	echo "\t<photo sorce>\t\tphoto source file"
 	echo "\t<sign color>\t\tSet the color of the sign, default is white. Can be:"
 	echo "\t\t\t\t\tW -- White sign"
@@ -83,6 +78,7 @@ else
 	fi
 fi
 
+#cp $ORIG $DEST
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
 
 echo "Photo signed output is $DEST";

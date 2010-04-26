@@ -1,24 +1,16 @@
 #!/bin/sh
 #Prepare photo to upload.
 
-#TODO
-#1.firma foto
-#2.ridimensiona foto
-#3.copia nella cartella toUpload
-
 #Source file
 ORIG="$1"
 #Signature color
 COLOR="$2"
 #Signature position
 POS="$3"
-#TODO
-#Photo Orientation
-ORI="$4"
 
 usage ()
 {
-	echo "usage -- $0 <photo sorce> <sign color> <sign pos> <photo orientation>";
+	echo "usage -- $0 <photo sorce> <sign color> <sign pos>";
 	echo "\t<photo sorce>\t\tphoto source file"
 	echo "\t<sign color>\t\tSet the color of the sign, default is white. Can be:"
 	echo "\t\t\t\t\tW -- White sign"
@@ -26,7 +18,6 @@ usage ()
 	echo "\t<sign pos>\t\tWhere to put the sign, default is BR. Can be:"
 	echo "\t\t\t\t\tBR -- (Bottom Right)"
 	echo "\t\t\t\t\tBL -- (Bottom Left)"
-	#echo "\t<photo orientation>\t\tPhoto Orientation, can be: O=orizontal V=vertical"
 }
 
 #Sign photo
@@ -34,13 +25,6 @@ if [ "$ORIG" = "-help" ];then
 	usage;
 	return $OK
 fi
-
-#TODO
-#Check if file exist
-#if [ ![-f $ORIG] ];then
-#	echo "File not found"
-#	exit 
-#fi
 
 echo "Processing photo $ORIG"
 
@@ -68,7 +52,7 @@ RDEST=${DEST##*/}
 mv $DEST toUpload/$RDEST
 echo "File stored to toUpload/$RDEST"
 #End move
-echo "Done!"
+echo "$DEST Done!"
 
 exit
 

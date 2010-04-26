@@ -1,14 +1,6 @@
 #!/bin/sh
 #Prepare photo to upload.
 
-#TODO
-#1.firma foto						- DONE
-#2.ridimensiona foto				- DONE
-#3.copia nella cartella toUpload	- DONE
-#4.check if file exist				- TODO
-#5.generalize on file renaming		- TODO
-#6.photo orientation				- TODO
-
 #Source file
 ORIG="$1"
 #Signature color
