@@ -1,6 +1,15 @@
 #!/bin/sh
 #Add signature to the photo.
 
+#TODO
+#1.firma foto				- DONE
+#2.ridimensiona foto			- DONE
+#3.copia nella cartella toUpload	- DONE
+#4.check if file exist			- TODO
+#5.generalize on file renaming		- TODO
+#6.photo orientation			- TODO
+#7.auto reconize photo size		- TODO
+
 #Input vars
 #Source file
 ORIG="$1"
