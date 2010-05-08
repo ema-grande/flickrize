@@ -2,9 +2,9 @@
 #Add signature to the photo.
 
 #TODO
-#1.firma foto				- DONE
-#2.ridimensiona foto			- DONE
-#3.copia nella cartella toUpload	- DONE
+#1.sign photo				- DONE
+#2.resize photo				- DONE
+#3.copy into toUpload folder		- DONE
 #4.check if file exist			- TODO
 #5.generalize on file renaming		- TODO
 #6.photo orientation			- TODO
@@ -26,6 +26,13 @@ POS_ERR=1	#return 1 if sign position is no specified
 WSIGN="firma2_w.png"	#white signature
 BSIGN="firma2_b.png"	#black signature
 SIGN=$WSIGN
+
+#Calculate image size
+SIZE=$(exiv2 $ORIG | grep -i "image size")
+SIZE=${SIZE#*:*}
+WIDTH=${TEXT#*x*}
+HEIGHT=${TEXT%*x*}
+
 
 #ORIZONTAL PHOTO
 #BOTTOM RIGHT
