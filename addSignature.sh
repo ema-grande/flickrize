@@ -10,48 +10,50 @@
 
 #Input vars
 #Source file
-ORIG="$1"
-
-if [$ORIG = ""];then
-	ORIG="-help";
-fi
+ORIG="$1";
+SC="$2";
+SP="$3";
 
 #Output file
-DEST=${ORIG%*.JPG}
+DEST=${ORIG%*.JPG};
 DEST=$(echo "$DEST""_sign.JPG");
 
 #Error code
-OK=0		#everuthing is ok
-POS_ERR=1	#return 1 if sign position is no specified
+OK=0;		#everuthing is ok
+POS_ERR=1;	#return 1 if sign position is no specified
 
 #Sign file
-WSIGN="firma2_w.png"	#white signature
-BSIGN="firma2_b.png"	#black signature
-SIGN=$WSIGN
+WSIGN="firma2_w.png";	#white signature
+BSIGN="firma2_b.png";	#black signature
+SIGN=$WSIGN;
 
 usage ()
 {
 	echo "usage -- $0 <photo sorce> <sign color> <sign pos>";
-	echo "\t<photo sorce>\t\tphoto source file"
-	echo "\t<sign color>\t\tSet the color of the sign, default is white. Can be:"
-	echo "\t\t\t\t\tW -- White sign"
-	echo "\t\t\t\t\tB -- Black sign"
-	echo "\t<sign pos>\t\tWhere to put the sign, default is BR. Can be:"
-	echo "\t\t\t\t\tBR -- (Bottom Right)"
-	echo "\t\t\t\t\tBL -- (Bottom Left)"
+	echo "\t<photo sorce>\t\tphoto source file";
+	echo "\t<sign color>\t\tSet the color of the sign, default is white. Can be:";
+	echo "\t\t\t\t\tW -- White sign";
+	echo "\t\t\t\t\tB -- Black sign";
+	echo "\t<sign pos>\t\tWhere to put the sign, default is BR. Can be:";
+	echo "\t\t\t\t\tBR -- (Bottom Right)";
+	echo "\t\t\t\t\tBL -- (Bottom Left)";
 }
 
-#if [ [$ORIG = "-help"] || [$ORIG = ""]];then
+#if [ ["$ORIG" = "-help"] || ["$ORIG" = ""]] ;then
+if [ "$ORIG" = "" ];then
+	usage;
+	return $OK;
+fi
 if [ "$ORIG" = "-help" ];then
 	usage;
 	return $OK;
 fi
 
 #Calculate image size
-SIZE=$(exiv2 $ORIG | grep -i "image size")
-SIZE=${SIZE#*:*}
-HEIGHT=${SIZE#*x*}
-WIDTH=${SIZE%*x*}
+SIZE=$(exiv2 $ORIG | grep -i "image size");
+SIZE=${SIZE#*:*};
+HEIGHT=${SIZE#*x*};
+WIDTH=${SIZE%*x*};
 
 #Calculate sign position
 : $((XPOS = $WIDTH - 1020)); #1020 = Photo xSize - ($SIGN Width + 20)
@@ -59,20 +61,21 @@ WIDTH=${SIZE%*x*}
 
 #ORIZONTAL PHOTO
 #BOTTOM RIGHT
-BR="+$XPOS+$YPOS"
+BR="+$XPOS+$YPOS";
 #BOTTOM LEFT
-BL="+20+$YPOS"
+BL="+20+$YPOS";
 #VERTICAL PHOTO
 #BOTTOM RIGHT
-VBR="+2620+3260"
+VBR="+2620+3260";
 #BOTTOM LEFT
-VBL="+2620+20"
+VBL="+2620+20";
 
 #echo "Image size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
 
 #Default is BR
-SIGNPOS="$BR"
+SIGNPOS="$BR";
 
+#TODO Adjust this if costruct
 #Signature color
 if [ "$2" = "" ];then
 	echo "Signature color will be white!";
