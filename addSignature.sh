@@ -3,12 +3,10 @@
 
 #TODO
 #1.sign photo				- DONE
-#2.resize photo				- DONE
-#3.copy into toUpload folder		- DONE
-#4.check if file exist			- TODO
-#5.generalize on file renaming		- TODO
-#6.photo orientation			- TODO
-#7.auto reconize photo size		- TODO
+#2.check if file exist			- TODO
+#3.generalize on file renaming		- TODO
+#4.photo orientation (oriz or vert)	- TODO
+#5.auto reconize photo size		- DONE
 
 #Input vars
 #Source file
@@ -30,20 +28,25 @@ SIGN=$WSIGN
 #Calculate image size
 SIZE=$(exiv2 $ORIG | grep -i "image size")
 SIZE=${SIZE#*:*}
-WIDTH=${TEXT#*x*}
-HEIGHT=${TEXT%*x*}
+HEIGHT=${SIZE#*x*}
+WIDTH=${SIZE%*x*}
 
+#Calculate sign position
+: $((XPOS = $WIDTH - 1020));
+: $((YPOS = $HEIGHT - 220));
 
 #ORIZONTAL PHOTO
 #BOTTOM RIGHT
-BR="+3260+2620"
+BR="+$XPOS+$YPOS"
 #BOTTOM LEFT
-BL="+20+2620"
+BL="+20+$YPOS"
 #VERTICAL PHOTO
 #BOTTOM RIGHT
 VBR="+2620+3260"
 #BOTTOM LEFT
 VBL="+2620+20"
+
+#echo "Image size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
 
 #Default is BR
 SIGNPOS="$BR"
