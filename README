@@ -1,6 +1,8 @@
 Flickerize is a collection of scripts to sign e resize photo to upload then on some photo sharing service!
 Optimized for flickr.com
 
+If doesn't exist create "toUpload" folder and "upload.txt" file
+
 after configured "upload.txt" file
 
 	where upload.txt file structure is:
