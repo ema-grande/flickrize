@@ -12,6 +12,10 @@
 #Source file
 ORIG="$1"
 
+if [$ORIG = ""];then
+	ORIG="-help";
+fi
+
 #Output file
 DEST=${ORIG%*.JPG}
 DEST=$(echo "$DEST""_sign.JPG");
@@ -24,32 +28,6 @@ POS_ERR=1	#return 1 if sign position is no specified
 WSIGN="firma2_w.png"	#white signature
 BSIGN="firma2_b.png"	#black signature
 SIGN=$WSIGN
-
-#Calculate image size
-SIZE=$(exiv2 $ORIG | grep -i "image size")
-SIZE=${SIZE#*:*}
-HEIGHT=${SIZE#*x*}
-WIDTH=${SIZE%*x*}
-
-#Calculate sign position
-: $((XPOS = $WIDTH - 1020));
-: $((YPOS = $HEIGHT - 220));
-
-#ORIZONTAL PHOTO
-#BOTTOM RIGHT
-BR="+$XPOS+$YPOS"
-#BOTTOM LEFT
-BL="+20+$YPOS"
-#VERTICAL PHOTO
-#BOTTOM RIGHT
-VBR="+2620+3260"
-#BOTTOM LEFT
-VBL="+2620+20"
-
-#echo "Image size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
-
-#Default is BR
-SIGNPOS="$BR"
 
 usage ()
 {
@@ -68,6 +46,32 @@ if [ "$ORIG" = "-help" ];then
 	usage;
 	return $OK;
 fi
+
+#Calculate image size
+SIZE=$(exiv2 $ORIG | grep -i "image size")
+SIZE=${SIZE#*:*}
+HEIGHT=${SIZE#*x*}
+WIDTH=${SIZE%*x*}
+
+#Calculate sign position
+: $((XPOS = $WIDTH - 1020)); #1020 = Photo xSize - ($SIGN Width + 20)
+: $((YPOS = $HEIGHT - 220)); #220 = Photo ySize - ($SIGN Height + 20)
+
+#ORIZONTAL PHOTO
+#BOTTOM RIGHT
+BR="+$XPOS+$YPOS"
+#BOTTOM LEFT
+BL="+20+$YPOS"
+#VERTICAL PHOTO
+#BOTTOM RIGHT
+VBR="+2620+3260"
+#BOTTOM LEFT
+VBL="+2620+20"
+
+#echo "Image size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
+
+#Default is BR
+SIGNPOS="$BR"
 
 #Signature color
 if [ "$2" = "" ];then
