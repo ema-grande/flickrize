@@ -44,6 +44,8 @@ cp $SOURCE $DEST
 mogrify -geometry 1280 $DEST
 #End Resize photo
 
+#TODO mv photo to the same $DEST folder
+#cd $DEST $PWD/toUpload
 #Move resized photo to toUpload folder
 RDEST=${DEST##*/}
 mv $DEST toUpload/$RDEST
