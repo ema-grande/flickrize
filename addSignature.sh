@@ -7,6 +7,7 @@
 #3.generalize on file renaming		- TODO
 #4.photo orientation (oriz or vert)	- TODO
 #5.auto reconize photo size		- DONE
+#6.resize sign to check photo size	- TODO
 
 #Input vars
 #Source file
@@ -54,10 +55,43 @@ SIZE=$(exiv2 $ORIG | grep -i "image size");
 SIZE=${SIZE#*:*};
 HEIGHT=${SIZE#*x*};
 WIDTH=${SIZE%*x*};
+echo "Image:" $WIDTH "x" $HEIGHT
 
-#Calculate sign position
-: $((XPOS = $WIDTH - 1020)); #1020 = Photo xSize - ($SIGN Width + 20)
-: $((YPOS = $HEIGHT - 220)); #220 = Photo ySize - ($SIGN Height + 20)
+#Resize sign file
+: $((PERCENT = $WIDTH * 100 / 4288 ))
+echo "Percentuale di ridimensionamento:" $PERCENT"%"
+
+#TODO Adjust this "if"
+#Signature color
+if [ "$2" = "" ];then
+	echo "Signature color will be white!";
+else
+	if [ "$2" = "W" ];then
+		SIGN="$WSIGN";
+		echo "Signature color will white!";
+	fi
+	if [ "$2" = "B" ];then
+		SIGN="$BSIGN";
+		echo "Signature color will black!";
+	fi
+fi
+
+#Prepare sign file
+cp "$SIGN" "$SIGN""_tmp"
+mogrify -resize "$PERCENT""%" "$SIGN""_tmp"
+SIGN="$SIGN""_tmp"
+echo $SIGN
+
+#Calculate sign size for better positioning
+SIGNSIZE=$(exiv2 $SIGN | grep -i "image size");
+SIGNSIZE=${SIGNSIZE#*:*};
+SHEIGHT=${SIGNSIZE#*x*};
+SWIDTH=${SIGNSIZE%*x*};
+echo "Sign:" $SWIDTH"x"$SHEIGHT
+
+#Calculate sign position #TODO Change number with $SHEIGHT $SWIDTH vars
+: $((XPOS = $WIDTH - $SWIDTH - 20)); #1020 = Photo xSize - ($SIGN Width + 20)
+: $((YPOS = $HEIGHT - $SHEIGHT - 20)); #220 = Photo ySize - ($SIGN Height + 20)
 
 #ORIZONTAL PHOTO
 #BOTTOM RIGHT
@@ -75,20 +109,7 @@ VBL="+2620+20";
 #Default is BR
 SIGNPOS="$BR";
 
-#TODO Adjust this if costruct
-#Signature color
-if [ "$2" = "" ];then
-	echo "Signature color will be white!";
-else
-	if [ "$2" = "W" ];then
-		SIGN="$WSIGN";
-		echo "Signature color will white!";
-	fi
-	if [ "$2" = "B" ];then
-		SIGN="$BSIGN";
-		echo "Signature color will black!";
-	fi
-fi
+
 
 #Signature position
 if [ "$3" = "" ];then
@@ -106,6 +127,7 @@ fi
 
 #cp $ORIG $DEST
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
+rm $SIGN
 
 echo "Photo signed output is $DEST";
 
