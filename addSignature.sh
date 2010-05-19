@@ -40,7 +40,7 @@ usage ()
 	echo "\t\t\t\t\tBL -- (Bottom Left)";
 }
 
-#if [ ["$ORIG" = "-help"] || ["$ORIG" = ""]] ;then
+#TODO add OR statement
 if [ "$ORIG" = "" ];then
 	usage;
 	return $OK;
@@ -51,15 +51,15 @@ if [ "$ORIG" = "-help" ];then
 fi
 
 #Calculate image size
-SIZE=$(exiv2 $ORIG | grep -i "image size");
+SIZE=$(exiv2 $ORIG | grep -i "image size") 2> /dev/null;
 SIZE=${SIZE#*:*};
 HEIGHT=${SIZE#*x*};
 WIDTH=${SIZE%*x*};
-echo "Image:" $WIDTH "x" $HEIGHT
+#echo "Image:" $WIDTH "x" $HEIGHT
 
 #Resize sign file
 : $((PERCENT = $WIDTH * 100 / 4288 ))
-echo "Percentuale di ridimensionamento:" $PERCENT"%"
+#echo "Percentuale di ridimensionamento:" $PERCENT"%"
 
 #TODO Adjust this "if"
 #Signature color
@@ -80,14 +80,14 @@ fi
 cp "$SIGN" "$SIGN""_tmp"
 mogrify -resize "$PERCENT""%" "$SIGN""_tmp"
 SIGN="$SIGN""_tmp"
-echo $SIGN
+#echo $SIGN
 
 #Calculate sign size for better positioning
-SIGNSIZE=$(exiv2 $SIGN | grep -i "image size");
+SIGNSIZE=$(exiv2 $SIGN | grep -i "image size") 2> /dev/null;
 SIGNSIZE=${SIGNSIZE#*:*};
 SHEIGHT=${SIGNSIZE#*x*};
 SWIDTH=${SIGNSIZE%*x*};
-echo "Sign:" $SWIDTH"x"$SHEIGHT
+#echo "Sign:" $SWIDTH"x"$SHEIGHT
 
 #Calculate sign position #TODO Change number with $SHEIGHT $SWIDTH vars
 : $((XPOS = $WIDTH - $SWIDTH - 20)); #1020 = Photo xSize - ($SIGN Width + 20)
@@ -108,8 +108,6 @@ VBL="+2620+20";
 
 #Default is BR
 SIGNPOS="$BR";
-
-
 
 #Signature position
 if [ "$3" = "" ];then

@@ -45,9 +45,6 @@ mogrify -geometry 1280 $DEST
 #End Resize photo
 
 #Move resized photo to toUpload folder
-#if [ [ -f "toUpload" ] ];then
-#	mkdir toUplad
-#fi
 RDEST=${DEST##*/}
 mv $DEST toUpload/$RDEST
 echo "File stored to toUpload/$RDEST"
