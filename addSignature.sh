@@ -64,15 +64,15 @@ WIDTH=${SIZE%*x*};
 #TODO Adjust this "if"
 #Signature color
 if [ "$2" = "" ];then
-	echo "Signature color will be white!";
+	echo "\tSignature color will be white!";
 else
 	if [ "$2" = "W" ];then
 		SIGN="$WSIGN";
-		echo "Signature color will white!";
+		echo "\tSignature color will white!";
 	fi
 	if [ "$2" = "B" ];then
 		SIGN="$BSIGN";
-		echo "Signature color will black!";
+		echo "\tSignature color will black!";
 	fi
 fi
 
@@ -111,15 +111,15 @@ SIGNPOS="$BR";
 
 #Signature position
 if [ "$3" = "" ];then
-	echo "Signature position will be bottom right!";
+	echo "\tSignature position will be bottom right!";
 else
 	if [ "$3" = "BR" ];then
 		SIGNPOS="$BR";
-		echo "Signature position will be bottom right!";
+		echo "\tSignature position will be bottom right!";
 	fi
 	if [ "$3" = "BL" ];then
 		SIGNPOS="$BL";
-		echo "Signature position will be bottom left!";
+		echo "\tSignature position will be bottom left!";
 	fi
 fi
 
@@ -127,6 +127,6 @@ fi
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
 rm $SIGN
 
-echo "Photo signed output is $DEST";
+echo "\tPhoto signed output is $DEST";
 
 exit

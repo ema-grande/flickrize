@@ -6,16 +6,17 @@ If doesn't exist create "toUpload" folder and "upload.txt" file
 after configured "upload.txt" file
 
 	where upload.txt file structure is:
-	#<photo path>				<sign color>		<sign position>
-	2010/03/23/DSC_0015.JPG		W					BL
-	2010/03/23/DSC_0020.JPG		B					BR
-	2010/03/23/DSC_0031.JPG		W					BR
-	2010/03/23/DSC_0059.JPG		W					BL
+	#<photo path>			<sign color>		<sign position>		<photo title>
+	2010/03/23/DSC_0015.JPG		W			BL			Photo-Title
+	2010/03/23/DSC_0020.JPG		B			BR			Photo-Title
+	2010/03/23/DSC_0031.JPG		W			BR			Photo-Title
+	2010/03/23/DSC_0059.JPG		W			BL			Photo-Title
 
 	where:
 	<photo path> is relative photo path from flickerize.sh file
 	<sign color> can be: "B" or "W"
 	<sign position> can be: "BL" or "BR"
+	<photo title> file destination name (if not specified orig file name is used)
 
 from flickerize.sh script folder use:
 
