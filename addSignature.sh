@@ -2,12 +2,13 @@
 #Add signature to the photo.
 
 #TODO
-#1.sign photo				- DONE
-#2.check if file exist			- TODO
-#3.generalize on file renaming		- TODO
-#4.photo orientation (oriz or vert)	- TODO
-#5.auto reconize photo size		- DONE
-#6.resize sign to check photo size	- TODO
+#1.sign photo					- DONE
+#2.check if file exist				- TODO
+#3.generalize on file renaming			- TODO
+#4.photo orientation (oriz or vert)		- TODO
+#5.auto reconize photo size			- DONE
+#6.resize sign to check photo size		- DONE
+#7.Control if more then 1 photo is passed	- TODO
 
 #Input vars
 #Source file
