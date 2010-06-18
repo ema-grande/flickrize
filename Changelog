@@ -1,0 +1,52 @@
+2010-06-18  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * addSignature.sh, toFlickr.sh, upload.txt: Insert debug info
+
+2010-05-30  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * README, addSignature.sh, flickerize.sh, toFlickr.sh: Add possibility to add
+  photo title and change output info structure
+
+2010-05-19  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * toFlickr.sh: add a TODO comment
+
+  * addSignature.sh, toFlickr.sh: add a todo e remove error on std output
+
+  * addSignature.sh, firma2_b.png: Update sign method, now sign is
+  proportionated to image size!
+
+  * upload.txt: delete useless fiel
+
+  * upload.txt: signed some photo
+
+2010-05-10  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * README, upload.txt: some adjust to README file and add upload.txt file
+
+  * upload.txt: Del upload.txt file
+
+2010-05-09  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * addSignature.sh: correct some typo and adjust some variable
+
+  * addSignature.sh: adjust some part of the code
+
+  * addSignature.sh: Add dimension auto reconize!
+
+2010-05-08  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * addSignature.sh: initiate autoreconize photo size.
+
+  * addSignature.sh: add TODO list
+
+2010-04-26  Emanuele Grande <caccolangrifata@gmail.com>
+
+  * addSignature_0.2.sh, firma.xcf, firma2.xcf, firma_b.xcf,
+  rename_adobeRGB.sh, sign/firma.xcf, sign/firma2.xcf, sign/firma_b.xcf,
+  toFlickr_0.2.sh: adjust file a dir structure/organization.
+
+  * README: Adjust!
+
+  * addSignature.sh, addSignature_0.2.sh, toFlickr.sh, toFlickr_0.2.sh,
+  upload.txt: edit some comment on 0.1 and 0.2 version of the script
