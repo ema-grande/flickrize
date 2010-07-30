@@ -1,5 +1,7 @@
 2010-06-18  Emanuele Grande <caccolangrifata@gmail.com>
 
+  * Changelog: add e popolate changelog file
+
   * addSignature.sh, toFlickr.sh, upload.txt: Insert debug info
 
 2010-05-30  Emanuele Grande <caccolangrifata@gmail.com>
