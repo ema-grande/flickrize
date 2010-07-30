@@ -8,9 +8,16 @@ COLOR="$2"
 #Signature position
 POS="$3"
 #Photo Title
-TITLE="$4.jpg"
+#if [ "$4" = "" ]
+#then
+#	TITLE=${ORIG##*/}
+#	TITLE=${TITLE%*.JPG}
+#	TITLE="$TITLE""_sign.JPG"
+#else
+	TITLE="$4.jpg"
+#fi
 #DebugInfo
-DEBUG=0
+DEBUG=1
 
 usage ()
 {
@@ -26,11 +33,13 @@ usage ()
 }
 
 #Sign photo
-if [ "$ORIG" = "" ];then
+if [ "$ORIG" = "" ]
+then
 	usage;
 	return $OK;
 fi
-if [ "$ORIG" = "-help" ];then
+if [ "$ORIG" = "-help" ]
+then
 	usage;
 	return $OK
 fi
@@ -42,30 +51,42 @@ echo "Processing photo $ORIG"
 
 
 #Resize photo
-#Source file
+#Source signed file
 SOURCE=${ORIG%*.JPG}
 SOURCE=$(echo "$SOURCE""_sign.JPG")
+#echo "\t\t$SOURCE"
 #Output file
+## add "_sign_resized"
 DEST=${ORIG%*.JPG}
 DEST=$(echo "$DEST""_sign_resized.JPG")
 #Take photo name
 RDEST=${DEST##*/}
-if [ $DEBUG -eq 1 ];then
-	echo "#### DEBUG INFO ####\nTITLE: $TITLE"
-	echo "#### DEBUG INFO ####\nSOURCE: $SOURCE"
-	echo "#### DEBUG INFO ####\nDEST: $DEST"
-	echo "#### DEBUG INFO ####\nRDEST: $RDEST"
-fi
+PFOLDER=${DEST%*/*.JPG};
 
 echo "\tCoping and resizing photo..."
-if [ "$TITLE" != "" ];then
-	PFOLDER=${DEST%*/*.JPG};
+if [ -z $4 ]
+then
+	TITLE=${ORIG##*/}
+	TITLE=${TITLE%*.JPG}
+	TITLE="$TITLE""_sign.JPG"
+else
 	DEST=$PFOLDER/$TITLE;
 	RDEST=$TITLE;
-	if [ $DEBUG -eq 1 ];then
-		echo "#### DEBUG INFO ####\nPFOLDER:$PFOLDER\tDEST:$DEST\tRDEST:$RDEST"
+	echo "SI"
+	if [ $DEBUG -eq 1 ]
+	then
+		echo "\t#### DEBUG INFO ####\n\tPFOLDER:$PFOLDER\tDEST:$DEST\tRDEST:$RDEST"
 	fi
 fi
+
+if [ $DEBUG -eq 1 ]
+then
+	echo "\t#### DEBUG INFO ####\n\tTITLE: $TITLE"
+	echo "\t#### DEBUG INFO ####\n\tSOURCE: $SOURCE"
+	echo "\t#### DEBUG INFO ####\n\tDEST: $DEST"
+	echo "\t#### DEBUG INFO ####\n\tRDEST: $RDEST"
+fi
+
 cp $SOURCE $DEST
 mogrify -geometry 1280 $DEST
 #End Resize photo
