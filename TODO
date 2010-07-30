@@ -1,7 +1,5 @@
 	creare una file di conf da cui prendere tutte le impostazioni
 	
-	FIX: se nel file upload.txt non viene specificato il titolo la foto non viene salvata. nota: verificare variabile nel comando mv
-
 -- addSignature.sh --
 	
 	1.sign photo								- DONE
