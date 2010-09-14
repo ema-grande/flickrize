@@ -17,7 +17,7 @@ POS="$3"
 	TITLE="$4.jpg"
 #fi
 #DebugInfo
-DEBUG=1
+DEBUG=0
 
 usage ()
 {
@@ -72,7 +72,6 @@ then
 else
 	DEST=$PFOLDER/$TITLE;
 	RDEST=$TITLE;
-	echo "SI"
 	if [ $DEBUG -eq 1 ]
 	then
 		echo "\t#### DEBUG INFO ####\n\tPFOLDER:$PFOLDER\tDEST:$DEST\tRDEST:$RDEST"

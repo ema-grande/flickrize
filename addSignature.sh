@@ -90,7 +90,7 @@ SHEIGHT=${SIGNSIZE#*x*};
 SWIDTH=${SIGNSIZE%*x*};
 #echo "Sign:" $SWIDTH"x"$SHEIGHT
 
-#Calculate sign position #TODO Change number with $SHEIGHT $SWIDTH vars
+#Calculate sign position 
 : $((XPOS = $WIDTH - $SWIDTH - 20)); #1020 = Photo xSize - ($SIGN Width + 20)
 : $((YPOS = $HEIGHT - $SHEIGHT - 20)); #220 = Photo ySize - ($SIGN Height + 20)
 
