@@ -27,6 +27,7 @@ POS_ERR=1;	#return 1 if sign position is no specified
 #Sign file
 WSIGN="firma2_w.png";	#white signature
 BSIGN="firma2_b.png";	#black signature
+#Default is white!
 SIGN=$WSIGN;
 
 usage ()
@@ -42,11 +43,7 @@ usage ()
 }
 
 #TODO add OR statement
-if [ "$ORIG" = "" ];then
-	usage;
-	return $OK;
-fi
-if [ "$ORIG" = "-help" ];then
+if [ "$ORIG" = "" -o "$ORIG" = "-h" -o "$ORIG" = "-help" -o "$ORIG" = "--help" ];then
 	usage;
 	return $OK;
 fi
@@ -64,18 +61,24 @@ WIDTH=${SIZE%*x*};
 
 #TODO Adjust this "if"
 #Signature color
-if [ "$2" = "" ];then
-	echo "\tSignature color will be white!";
-else
-	if [ "$2" = "W" ];then
-		SIGN="$WSIGN";
-		echo "\tSignature color will white!";
-	fi
-	if [ "$2" = "B" ];then
-		SIGN="$BSIGN";
-		echo "\tSignature color will black!";
-	fi
-fi
+#if [ "$2" = "" -o "$2" = "W" ];then
+#	echo "\tSignature color: white!";
+#else
+#	if [ "$2" = "B" ];then
+#		SIGN="$BSIGN";
+#		echo "\tSignature color: black!";
+#	fi
+#fi
+case "$2" in
+	"B" )
+	SIGN="$BSIGN"
+	echo "\tSignature color: black!";;
+	"W" )
+	SIGN="$WSIGN"
+	echo "\tSignature color: white!";;
+	* )
+	echo "\tDefault signature color: white!";;
+esac
 
 #Prepare sign file
 cp "$SIGN" "$SIGN""_tmp"
@@ -111,18 +114,28 @@ VBL="+2620+20";
 SIGNPOS="$BR";
 
 #Signature position
-if [ "$3" = "" ];then
-	echo "\tSignature position will be bottom right!";
-else
-	if [ "$3" = "BR" ];then
-		SIGNPOS="$BR";
-		echo "\tSignature position will be bottom right!";
-	fi
-	if [ "$3" = "BL" ];then
-		SIGNPOS="$BL";
-		echo "\tSignature position will be bottom left!";
-	fi
-fi
+#if [ "$3" = "" ];then
+#	echo "\tSignature position will be bottom right!";
+#else
+#	if [ "$3" = "BR" ];then
+#		SIGNPOS="$BR";
+#		echo "\tSignature position will be bottom right!";
+#	fi
+#	if [ "$3" = "BL" ];then
+#		SIGNPOS="$BL";
+#		echo "\tSignature position will be bottom left!";
+#	fi
+#fi
+case "$3" in
+	"BR" )
+	SIGNPOS="$BR"
+	echo "\tSignature position: bottom right!";;
+	"BL" )
+	SIGNPOS="$BL"
+	echo "\tSignature position: bottom left!";;
+	* )
+	echo "\tDefault signature position: bottom right!";;
+esac
 
 #cp $ORIG $DEST
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;

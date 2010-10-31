@@ -33,15 +33,10 @@ usage ()
 }
 
 #Sign photo
-if [ "$ORIG" = "" ]
+if [ "$ORIG" = "" -o "$ORIG" = "-h" -o "$ORIG" = "-help" -o "$ORIG" = "--help" ]
 then
 	usage;
 	return $OK;
-fi
-if [ "$ORIG" = "-help" ]
-then
-	usage;
-	return $OK
 fi
 
 echo "Processing photo $ORIG"
