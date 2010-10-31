@@ -2,33 +2,14 @@
 #Add signature to the photo.
 
 #TODO
-#1.sign photo					- DONE
-#2.check if file exist				- TODO
-#3.generalize on file renaming			- TODO
-#4.photo orientation (oriz or vert)		- TODO
-#5.auto reconize photo size			- DONE
-#6.resize sign to check photo size		- DONE
+#1.sign photo								- DONE
+#2.check if file exist						- TODO
+#3.generalize on file renaming				- TODO
+#4.photo orientation (oriz or vert)			- TODO
+#5.auto reconize photo size					- DONE
+#6.resize sign to check photo size			- DONE
 #7.Control if more then 1 photo is passed	- TODO
-
-#Input vars
-#Source file
-ORIG="$1";
-SC="$2";
-SP="$3";
-
-#Output file
-DEST=${ORIG%*.JPG};
-DEST=$(echo "$DEST""_sign.JPG");
-
-#Error code
-OK=0;		#everuthing is ok
-POS_ERR=1;	#return 1 if sign position is no specified
-
-#Sign file
-WSIGN="firma2_w.png";	#white signature
-BSIGN="firma2_b.png";	#black signature
-#Default is white!
-SIGN=$WSIGN;
+#8.Parsing parameters						- TODO
 
 usage ()
 {
@@ -42,7 +23,28 @@ usage ()
 	echo "\t\t\t\t\tBL -- (Bottom Left)";
 }
 
-#TODO add OR statement
+#Error code
+OK=0;		#everuthing is ok!
+SIGN_POS_ERR=1;	#return 1 if sign position is no specified!
+SIGN_COL_ERR=2;	#return 2 if sign color is no specified!
+
+DEBUG=0		#DebugInfo: = 1 to print debug info
+
+#Input vars
+ORIG="$1";	#Source file
+SC="$2";	#Sign color
+SP="$3";	#Sign position
+
+#Output file
+EXT=${ORIG##*.};
+DEST=${ORIG%*.$EXT};
+DEST=$(echo "$DEST""_sign.$EXT");
+
+#Sign file
+WSIGN="firma2_w.png";	#White signature
+BSIGN="firma2_b.png";	#Black signature
+SIGN=$WSIGN;			#Default is white!
+
 if [ "$ORIG" = "" -o "$ORIG" = "-h" -o "$ORIG" = "-help" -o "$ORIG" = "--help" ];then
 	usage;
 	return $OK;
@@ -53,22 +55,15 @@ SIZE=$(exiv2 $ORIG | grep -i "image size") 2> /dev/null;
 SIZE=${SIZE#*:*};
 HEIGHT=${SIZE#*x*};
 WIDTH=${SIZE%*x*};
-#echo "Image:" $WIDTH "x" $HEIGHT
 
 #Resize sign file
 : $((PERCENT = $WIDTH * 100 / 4288 ))
-#echo "Percentuale di ridimensionamento:" $PERCENT"%"
 
-#TODO Adjust this "if"
-#Signature color
-#if [ "$2" = "" -o "$2" = "W" ];then
-#	echo "\tSignature color: white!";
-#else
-#	if [ "$2" = "B" ];then
-#		SIGN="$BSIGN";
-#		echo "\tSignature color: black!";
-#	fi
-#fi
+if [ $DEBUG -eq 1 ];then	#Debug info: image size and resize
+	echo "#### DEBUG INFO ####\tImage:" $WIDTH "x" $HEIGHT
+	echo "#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
+fi
+
 case "$2" in
 	"B" )
 	SIGN="$BSIGN"
@@ -84,48 +79,37 @@ esac
 cp "$SIGN" "$SIGN""_tmp"
 mogrify -resize "$PERCENT""%" "$SIGN""_tmp"
 SIGN="$SIGN""_tmp"
-#echo $SIGN
 
 #Calculate sign size for better positioning
 SIGNSIZE=$(exiv2 $SIGN | grep -i "image size") 2> /dev/null;
 SIGNSIZE=${SIGNSIZE#*:*};
 SHEIGHT=${SIGNSIZE#*x*};
 SWIDTH=${SIGNSIZE%*x*};
-#echo "Sign:" $SWIDTH"x"$SHEIGHT
+
+if [ $DEBUG -eq 1 ];then	#Debug info: sign file resize and sign size
+	echo "#### DEBUG INFO ####\t$SIGN"
+	echo "#### DEBUG INFO ####\tSign:" $SWIDTH"x"$SHEIGHT
+fi
 
 #Calculate sign position 
-: $((XPOS = $WIDTH - $SWIDTH - 20)); #1020 = Photo xSize - ($SIGN Width + 20)
-: $((YPOS = $HEIGHT - $SHEIGHT - 20)); #220 = Photo ySize - ($SIGN Height + 20)
+: $((XPOS = $WIDTH - $SWIDTH - 20)); # = Photo xSize - ($SIGN Width + 20)
+: $((YPOS = $HEIGHT - $SHEIGHT - 20)); # = Photo ySize - ($SIGN Height + 20)
 
 #ORIZONTAL PHOTO
-#BOTTOM RIGHT
-BR="+$XPOS+$YPOS";
-#BOTTOM LEFT
-BL="+20+$YPOS";
+BR="+$XPOS+$YPOS";	#BOTTOM RIGHT
+BL="+20+$YPOS";		#BOTTOM LEFT
 #VERTICAL PHOTO
-#BOTTOM RIGHT
-VBR="+2620+3260";
-#BOTTOM LEFT
-VBL="+2620+20";
+VBR="+2620+3260";	#BOTTOM RIGHT
+VBL="+2620+20";		#BOTTOM LEFT
 
-#echo "Image size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
+if [ $DEBUG -eq 1 ];then	#Debug info: Image size, Sign pos and color
+	echo "#### DEBUG INFO ####\tImage size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
+fi
 
 #Default is BR
 SIGNPOS="$BR";
 
 #Signature position
-#if [ "$3" = "" ];then
-#	echo "\tSignature position will be bottom right!";
-#else
-#	if [ "$3" = "BR" ];then
-#		SIGNPOS="$BR";
-#		echo "\tSignature position will be bottom right!";
-#	fi
-#	if [ "$3" = "BL" ];then
-#		SIGNPOS="$BL";
-#		echo "\tSignature position will be bottom left!";
-#	fi
-#fi
 case "$3" in
 	"BR" )
 	SIGNPOS="$BR"

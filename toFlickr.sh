@@ -1,24 +1,6 @@
 #!/bin/sh
 #Prepare photo to upload.
 
-#Source file
-ORIG="$1"
-#Signature color
-COLOR="$2"
-#Signature position
-POS="$3"
-#Photo Title
-#if [ "$4" = "" ]
-#then
-#	TITLE=${ORIG##*/}
-#	TITLE=${TITLE%*.JPG}
-#	TITLE="$TITLE""_sign.JPG"
-#else
-	TITLE="$4.jpg"
-#fi
-#DebugInfo
-DEBUG=0
-
 usage ()
 {
 	echo "usage -- $0 <photo sorce> <sign color> <sign pos> <photo title>";
@@ -32,7 +14,19 @@ usage ()
 	echo "\t<photo title>\t\tPhoto title"
 }
 
-#Sign photo
+#Error code
+OK=0;		#everuthing is ok!
+SIGN_POS_ERR=1;	#return 1 if sign position is no specified!
+SIGN_COL_ERR=2;	#return 2 if sign color is no specified!
+
+ORIG="$1"		#Source file
+COLOR="$2"		#Signature color
+POS="$3"		#Signature position
+EXT=${ORIG##*.};
+TITLE="$4.$EXT"
+
+DEBUG=0			#DebugInfo
+
 if [ "$ORIG" = "" -o "$ORIG" = "-h" -o "$ORIG" = "-help" -o "$ORIG" = "--help" ]
 then
 	usage;
@@ -40,30 +34,27 @@ then
 fi
 
 echo "Processing photo $ORIG"
-
-./addSignature.sh $ORIG $COLOR $POS
-#End Sign photo
-
+./addSignature.sh $ORIG $COLOR $POS		#Sign photo with addSignature.sh script
 
 #Resize photo
 #Source signed file
-SOURCE=${ORIG%*.JPG}
-SOURCE=$(echo "$SOURCE""_sign.JPG")
+SOURCE=${ORIG%*.$EXT}
+SOURCE=$(echo "$SOURCE""_sign.$EXT")
 #echo "\t\t$SOURCE"
+
 #Output file
-## add "_sign_resized"
-DEST=${ORIG%*.JPG}
-DEST=$(echo "$DEST""_sign_resized.JPG")
+DEST=${ORIG%*.$EXT}
+DEST=$(echo "$DEST""_sign_resized.$EXT")
 #Take photo name
 RDEST=${DEST##*/}
-PFOLDER=${DEST%*/*.JPG};
+PFOLDER=${DEST%*/*.$EXT};
 
 echo "\tCoping and resizing photo..."
 if [ -z $4 ]
 then
 	TITLE=${ORIG##*/}
-	TITLE=${TITLE%*.JPG}
-	TITLE="$TITLE""_sign.JPG"
+	TITLE=${TITLE%*.$EXT}
+	TITLE="$TITLE""_sign.$EXT"
 else
 	DEST=$PFOLDER/$TITLE;
 	RDEST=$TITLE;
