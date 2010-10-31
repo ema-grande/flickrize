@@ -15,7 +15,7 @@ usage ()
 }
 
 #Error code
-OK=0;		#everuthing is ok!
+OK=0;			#everuthing is ok!
 SIGN_POS_ERR=1;	#return 1 if sign position is no specified!
 SIGN_COL_ERR=2;	#return 2 if sign color is no specified!
 
@@ -25,7 +25,7 @@ POS="$3"		#Signature position
 EXT=${ORIG##*.};
 TITLE="$4.$EXT"
 
-DEBUG=0			#DebugInfo
+DEBUG=0			#DebugInfo: = 1 to print debug info
 
 if [ "$ORIG" = "" -o "$ORIG" = "-h" -o "$ORIG" = "-help" -o "$ORIG" = "--help" ]
 then
@@ -40,14 +40,13 @@ echo "Processing photo $ORIG"
 #Source signed file
 SOURCE=${ORIG%*.$EXT}
 SOURCE=$(echo "$SOURCE""_sign.$EXT")
-#echo "\t\t$SOURCE"
 
 #Output file
 DEST=${ORIG%*.$EXT}
 DEST=$(echo "$DEST""_sign_resized.$EXT")
-#Take photo name
+#Photo name
 RDEST=${DEST##*/}
-PFOLDER=${DEST%*/*.$EXT};
+PFOLDER=$(dirname $DEST);
 
 echo "\tCoping and resizing photo..."
 if [ -z $4 ]
@@ -60,16 +59,17 @@ else
 	RDEST=$TITLE;
 	if [ $DEBUG -eq 1 ]
 	then
-		echo "\t#### DEBUG INFO ####\n\tPFOLDER:$PFOLDER\tDEST:$DEST\tRDEST:$RDEST"
+		echo "\t#### DEBUG INFO ####\tPFOLDER:$PFOLDER\tDEST:$DEST\tRDEST:$RDEST"
 	fi
 fi
 
 if [ $DEBUG -eq 1 ]
 then
-	echo "\t#### DEBUG INFO ####\n\tTITLE: $TITLE"
-	echo "\t#### DEBUG INFO ####\n\tSOURCE: $SOURCE"
-	echo "\t#### DEBUG INFO ####\n\tDEST: $DEST"
-	echo "\t#### DEBUG INFO ####\n\tRDEST: $RDEST"
+	echo "\t#### DEBUG INFO ####\tTITLE: $TITLE"
+	echo "\t#### DEBUG INFO ####\tSOURCE: $SOURCE"
+	echo "\t#### DEBUG INFO ####\tDEST: $DEST"
+	echo "\t#### DEBUG INFO ####\tRDEST: $RDEST"
+	echo "\t#### DEBUG INFO ####\tPFOLDER: $PFOLDER"
 fi
 
 cp $SOURCE $DEST
