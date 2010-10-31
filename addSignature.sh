@@ -37,8 +37,7 @@ SP="$3";	#Sign position
 
 #Output file
 EXT=${ORIG##*.};
-DEST=${ORIG%*.$EXT};
-DEST=$(echo "$DEST""_sign.$EXT");
+DEST=${ORIG%*.$EXT}"_sign.$EXT");
 
 #Sign file
 WSIGN="firma2_w.png";	#White signature
@@ -59,7 +58,7 @@ WIDTH=${SIZE%*x*};
 #Resize sign file
 : $((PERCENT = $WIDTH * 100 / 4288 ))
 
-if [ $DEBUG -eq 1 ];then	#Debug info: image size and resize
+if [ $DEBUG -eq 1 ]; then	#Debug info: image size and resize
 	echo "#### DEBUG INFO ####\tImage:" $WIDTH "x" $HEIGHT
 	echo "#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
 fi
@@ -86,7 +85,7 @@ SIGNSIZE=${SIGNSIZE#*:*};
 SHEIGHT=${SIGNSIZE#*x*};
 SWIDTH=${SIGNSIZE%*x*};
 
-if [ $DEBUG -eq 1 ];then	#Debug info: sign file resize and sign size
+if [ $DEBUG -eq 1 ]; then	#Debug info: sign file resize and sign size
 	echo "#### DEBUG INFO ####\t$SIGN"
 	echo "#### DEBUG INFO ####\tSign:" $SWIDTH"x"$SHEIGHT
 fi
@@ -102,7 +101,7 @@ BL="+20+$YPOS";		#BOTTOM LEFT
 VBR="+2620+3260";	#BOTTOM RIGHT
 VBL="+2620+20";		#BOTTOM LEFT
 
-if [ $DEBUG -eq 1 ];then	#Debug info: Image size, Sign pos and color
+if [ $DEBUG -eq 1 ]; then	#Debug info: Image size, Sign pos and color
 	echo "#### DEBUG INFO ####\tImage size:$WIDTH x $HEIGHT", "Sign Pos: BR_$BR BL_$BL"
 fi
 

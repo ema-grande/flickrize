@@ -37,23 +37,17 @@ echo "Processing photo $ORIG"
 ./addSignature.sh $ORIG $COLOR $POS		#Sign photo with addSignature.sh script
 
 #Resize photo
-#Source signed file
-SOURCE=${ORIG%*.$EXT}
-SOURCE=$(echo "$SOURCE""_sign.$EXT")
-
+SOURCE=${ORIG%*.$EXT}"_sign.$EXT";		#Source signed file
 #Output file
-DEST=${ORIG%*.$EXT}
-DEST=$(echo "$DEST""_sign_resized.$EXT")
-#Photo name
-RDEST=${DEST##*/}
-PFOLDER=$(dirname $DEST);
+DEST=${ORIG%*.$EXT}"_sign_resized.$EXT"	#Destination signed file
+RDEST=${DEST##*/}						#Photo name
+PFOLDER=$(dirname $DEST);				#Photo folder
 
 echo "\tCoping and resizing photo..."
 if [ -z $4 ]
 then
 	TITLE=${ORIG##*/}
-	TITLE=${TITLE%*.$EXT}
-	TITLE="$TITLE""_sign.$EXT"
+	TITLE=${TITLE%*.$EXT}"_sign.$EXT"
 else
 	DEST=$PFOLDER/$TITLE;
 	RDEST=$TITLE;
