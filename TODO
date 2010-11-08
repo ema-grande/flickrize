@@ -4,16 +4,19 @@ TODO - List of things to add
 	
 	
 -- addSignature.sh --
-	
-	* sign photo								- DONE
-	* check if file exist						- TODO
-	* generalize on file renaming				- TODO
-	* photo orientation (oriz or vert)			- TODO
-	* auto reconize photo size					- DONE
-	* resize sign to check photo size			- DONE
-	* Control if more then 1 photo is passed	- TODO
-	
-	
+	* sign photo									- DONE
+	* check if file exist							- TODO
+	* generalize on file renaming					- TODO
+	* photo orientation (oriz or vert)				- TODO
+	* auto reconize photo size						- DONE
+	* resize sign to check photo size				- DONE
+	* Control if more then 1 photo is passed		- TODO
+	* Parsing parameters							- DONE
+	* Generalize on sign file						- TODO
+	* Redirect error to log file					- TODO
+	* Sign resize percent must be free from
+		photo and sign dimension					- TODO
+
 -- toFlickr.sh --
 
 -- flickrize.sh --

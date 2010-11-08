@@ -23,8 +23,6 @@ usage ()
 ###############		Variables		######################
 #Error code
 OK=0;				#everuthing is ok!
-SIGN_POS_ERR=1;		#return 1 if sign position is no specified!
-SIGN_COL_ERR=2;		#return 2 if sign color is no specified!
 
 DEBUG=0				#DebugInfo: = 1 to print debug info
 
