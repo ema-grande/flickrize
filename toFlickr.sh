@@ -1,65 +1,87 @@
 #!/bin/sh
 #Prepare photo to upload.
 
+###############		Subfunction		######################
 usage ()
 {
-	echo "usage -- $0 <photo sorce> <sign color> <sign pos> <photo title>";
-	echo "\t<photo sorce>\t\tphoto source file"
-	echo "\t<sign color>\t\tSet the color of the sign, default is white. Can be:"
-	echo "\t\t\t\t\tW -- White sign"
-	echo "\t\t\t\t\tB -- Black sign"
-	echo "\t<sign pos>\t\tWhere to put the sign, default is BR. Can be:"
-	echo "\t\t\t\t\tBR -- (Bottom Right)"
-	echo "\t\t\t\t\tBL -- (Bottom Left)"
-	echo "\t<photo title>\t\tPhoto title"
+	echo "usage: $0 [OPTION]... FILENAME...";
+	echo "\tFILENAME\t\tRelative path of the photo file to folder";
+	echo "\t\t\t\t\t$PWD"
+	echo
+	echo "\t--color=COLOR\t\tSet the color of the sign, default is white. COLOR can be:";
+	echo "\t\t\t\t\tW -- White sign";
+	echo "\t\t\t\t\tB -- Black sign";
+	echo "\t--pos=POS\t\tWhere to put the sign, default is BR. POS can be:";
+	echo "\t\t\t\t\tTL -- (Top Left)";
+	echo "\t\t\t\t\tTR -- (Top Right)";
+	echo "\t\t\t\t\tBL -- (Bottom Left)";
+	echo "\t\t\t\t\tBR -- (Bottom Right)";
+	echo "\t--title=TITLE\t\tSet TITLE of the photo. Will be the file name!";
+
 }
 
+###############		Variables		######################
 #Error code
-OK=0;			#everuthing is ok!
-SIGN_POS_ERR=1;	#return 1 if sign position is no specified!
-SIGN_COL_ERR=2;	#return 2 if sign color is no specified!
+OK=0;				#everuthing is ok!
+SIGN_POS_ERR=1;		#return 1 if sign position is no specified!
+SIGN_COL_ERR=2;		#return 2 if sign color is no specified!
 
-ORIG="$1"		#Source file
-COLOR="$2"		#Signature color
-POS="$3"		#Signature position
-EXT=${ORIG##*.};
-TITLE="$4.$EXT"
+DEBUG=0				#DebugInfo: = 1 to print debug info
 
-DEBUG=0			#DebugInfo: = 1 to print debug info
+###############		Param Parser		######################
+for param in $@; do
+	case ${param} in
+	"-h" | "-help" | "--help" )
+		usage;
+		return $OK;;
+	"--color="* )		#Catch sign color
+		COLOR=${param##*=};;
+	"--pos="* )			#Catch sign position
+		POS=${param##*=};;
+	"--title="* )
+		TITLE=${param##*=};;
+	* )
+		if [ -f "$param" ]
+	 	then
+	 	 	ORIG="$param"
+	 	else
+	 		echo "$param is not a file"
+	 		usage;
+	 		return $OK;
+	 	fi;;
+	esac
+done
 
-if [ "$ORIG" = "" -o "$ORIG" = "-h" -o "$ORIG" = "-help" -o "$ORIG" = "--help" ]
-then
+if [ "$ORIG" = "" ]; then
 	usage;
 	return $OK;
 fi
 
 echo "Processing photo $ORIG"
-./addSignature.sh $ORIG $COLOR $POS		#Sign photo with addSignature.sh script
+./addSignature.sh --color=$COLOR --pos=$POS $ORIG		#Sign photo with addSignature.sh script
 
 #Resize photo
+EXT=${ORIG##*.};
 SOURCE=${ORIG%*.$EXT}"_sign.$EXT";		#Source signed file
 #Output file
-DEST=${ORIG%*.$EXT}"_sign_resized.$EXT"	#Destination signed file
+DEST=${ORIG%*.$EXT}"_sign_resized."$EXT	#Destination signed file
 RDEST=${DEST##*/}						#Photo name
 PFOLDER=$(dirname $DEST);				#Photo folder
 
 echo "\tCoping and resizing photo..."
-if [ -z $4 ]
+if [ -z $TITLE ]
 then
 	TITLE=${ORIG##*/}
 	TITLE=${TITLE%*.$EXT}"_sign.$EXT"
 else
-	DEST=$PFOLDER/$TITLE;
-	RDEST=$TITLE;
-	if [ $DEBUG -eq 1 ]
-	then
-		echo "\t#### DEBUG INFO ####\tPFOLDER:$PFOLDER\tDEST:$DEST\tRDEST:$RDEST"
-	fi
+	DEST=$PFOLDER/$TITLE.$EXT;
+	RDEST=$TITLE.$EXT;
 fi
 
 if [ $DEBUG -eq 1 ]
 then
-	echo "\t#### DEBUG INFO ####\tTITLE: $TITLE"
+	echo "\t#### DEBUG INFO ####\tOrigin file: $ORIG"
+	echo "\t#### DEBUG INFO ####\tTitle: $TITLE"
 	echo "\t#### DEBUG INFO ####\tSOURCE: $SOURCE"
 	echo "\t#### DEBUG INFO ####\tDEST: $DEST"
 	echo "\t#### DEBUG INFO ####\tRDEST: $RDEST"

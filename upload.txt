@@ -1,4 +1,4 @@
 ../2010/09/05/*002.JPG B BR 
 ../2010/09/05/*003.JPG W BL 
-../2010/09/05/*004.JPG B BL Statuette2
-../2010/09/05/*005.JPG W BR Statuette3
+../2010/09/05/*004.JPG B TL Statuette2
+../2010/09/05/*005.JPG W TR Statuette3
