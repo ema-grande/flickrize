@@ -26,6 +26,8 @@ OK=0;				#everuthing is ok!
 
 DEBUG=0				#DebugInfo: = 1 to print debug info
 
+TOUPF="/home/caccola/Scrivania"		#Resized photo destination folder (this folder must be exist)
+
 ###############		Param Parser		######################
 for param in $@; do
 	case ${param} in
@@ -90,12 +92,13 @@ cp $SOURCE $DEST
 mogrify -geometry 1280 $DEST
 #End Resize photo
 
+#TODO check if $TOUPF exist
 #Move resized photo to toUpload folder
-mv $DEST ../toUpload/$RDEST
-echo "\tFile stored to ../toUpload/$RDEST"
+mv $DEST $TOUPF/$RDEST
+echo "\tFile stored to $TOUPF/$RDEST"
 #backup photo to signed/$TITLE
 mkdir $PFOLDER/signed 2> /dev/null
-mv $SOURCE $PFOLDER/signed/$TITLE
+mv $SOURCE $PFOLDER/signed/$TITLE.$EXT
 echo "Processing photo $ORIG Done!"
 
 exit
