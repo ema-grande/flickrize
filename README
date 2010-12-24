@@ -7,12 +7,18 @@ Optimized for flickr.com
 	
 run install.sh to prepare environment
 
-If doesn't exist create "../toUpload" folder and "upload.txt" file
+If doesn't exist create "upload.txt" file, located in the same dir of "flickrize.sh" file
 
-after configured "upload.txt" file
+Configure those vars
+ * addSignature.sh
+ 	WSIGN="firma2_w.png";	#White signature
+	BSIGN="firma2_b.png";	#Black signature
 
-	where upload.txt file structure is:
-	#<photo path>				<sign color>	<sign position>		<photo title>
+ * toFlickr.sh
+ 	TOUPF="/<some>/<path>/	#Resized photo destination folder (this folder must be exist)
+ 
+ * upload.txt
+ 	#<photo path>				<sign color>	<sign position>		<photo title>
 	2010/03/23/DSC_0015.JPG		W				BL					Photo-Title
 	2010/03/23/DSC_0020.JPG		B				BR					Photo-Title
 	2010/03/23/DSC_0031.JPG		W				BR					Photo-Title
@@ -24,7 +30,10 @@ after configured "upload.txt" file
 	<sign position> can be: "BL" "BR" "TR" "TL" (optional)
 	<photo title> file destination name (if not specified orig file name is used)
 
-finally run
+after configured "upload.txt" file you can finally run
 
 	./flickerize.sh
 
+knows bugs
+ * no space in every path
+ * 
