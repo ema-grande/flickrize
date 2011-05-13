@@ -3,4 +3,4 @@
 #very basic XD
 
 chmod +x *.sh
-mkdir ../toUpload
+#mkdir ../toUpload
