@@ -2,6 +2,7 @@ TODO - List of things to add
 	* create conf file for settings
 	* use "cut" and "sed" to generate file name
 	* parse path, so can use space and other cars
+	* use a var to open conf file
 	
 	
 -- addSignature.sh --

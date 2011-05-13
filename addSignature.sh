@@ -24,11 +24,13 @@ usage ()
 #Error code
 OK=0;				#everuthing is ok!
 
-DEBUG=0				#DebugInfo: = 1 to print debug info
+DEBUG=1				#DebugInfo: = 1 to print debug info
 
 #Sign file #TODO set form conf file
-WSIGN="firma2_w.png";	#White signature
-BSIGN="firma2_b.png";	#Black signature
+#WSIGN="firma2_w.png";	#White signature
+#BSIGN="firma2_b.png";	#Black signature
+WSIGN=$(cat conf | grep WHITESIGN | cut -d= -f2)
+BSIGN=$(cat conf | grep BLACKSIGN | cut -d= -f2)
 
 SIGN=$WSIGN;			#Default is white!
 
@@ -152,7 +154,9 @@ fi
 
 ###############		Apply		######################
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
-#rm $SIGN
+if [ ${PERCENT} -ne 100 ]; then
+	rm $SIGN
+fi
 
 echo "\tPhoto signed output is $DEST";
 

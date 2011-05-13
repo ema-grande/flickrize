@@ -4,7 +4,9 @@ Optimized for flickr.com
 ## Dependencies ##
 	exiv2
 	imagemagik
-	
+
+open "conf" file and set all the vars, read conf.help file for help
+
 run install.sh to prepare environment
 
 If doesn't exist create "upload.txt" file, located in the same dir of "flickrize.sh" file

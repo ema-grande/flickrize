@@ -3,4 +3,4 @@
 #very basic XD
 
 chmod +x *.sh
-#mkdir ../toUpload
+mkdir $(cat conf | grep RESPHOTOF | cut -d= -f2)
