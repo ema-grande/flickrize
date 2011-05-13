@@ -15,7 +15,7 @@ Configure those vars
 	BSIGN="firma2_b.png";	#Black signature
 
  * toFlickr.sh
- 	TOUPF="/<some>/<path>/	#Resized photo destination folder (this folder must be exist)
+ 	TOUPF="/<some>/<path>/	#Resized photo destination folder
  
  * upload.txt
  	#<photo path>				<sign color>	<sign position>		<photo title>
