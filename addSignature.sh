@@ -26,9 +26,10 @@ OK=0;				#everuthing is ok!
 
 DEBUG=0				#DebugInfo: = 1 to print debug info
 
-#Sign file
+#Sign file #TODO set form conf file
 WSIGN="firma2_w.png";	#White signature
 BSIGN="firma2_b.png";	#Black signature
+
 SIGN=$WSIGN;			#Default is white!
 
 ###############		Param Parser		######################
@@ -84,7 +85,7 @@ if [ -z $ORIG ]; then
 fi
 
 ###############		Variables		######################
-#Output file
+#Output file #TODO set from conf file
 EXT=${ORIG##*.};
 DEST=${ORIG%*.$EXT}"_sign.$EXT";
 
@@ -95,7 +96,7 @@ SIZE=${SIZE#*:*};
 HEIGHT=${SIZE#*x*};
 WIDTH=${SIZE%*x*};
 
-#Resize sign file
+#Resize sign file #TODO change this, generalize on photo dimensions
 : $((PERCENT = $WIDTH * 100 / 4288 ))	#firma.png must be 1000x200px
 
 #Prepare sign file
@@ -111,7 +112,7 @@ SIGNSIZE=${SIGNSIZE#*:*};
 SHEIGHT=${SIGNSIZE#*x*};
 SWIDTH=${SIGNSIZE%*x*};
 
-#Calculate sign position 
+#Calculate sign position #TODO generalize on photo dimension
 : $((BORDER = $WIDTH * 20 / 4288 ))
 : $((XPOS = $WIDTH - $SWIDTH - $BORDER)); # = Photo xSize - ($SIGN Width + 20)
 : $((YPOS = $HEIGHT - $SHEIGHT - $BORDER)); # = Photo ySize - ($SIGN Height + 20)
@@ -155,4 +156,4 @@ composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
 
 echo "\tPhoto signed output is $DEST";
 
-exit
+exit 0;
