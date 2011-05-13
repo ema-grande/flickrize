@@ -5,4 +5,4 @@ BLACKSIGN=firma2_b.png
 
 ## Resized photo folder section ###
 
-RESPHOTOF=$HOME/flickrize
+RESPHOTOF=/home/caccola/flickrize
