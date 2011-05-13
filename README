@@ -34,6 +34,3 @@ after configured "upload.txt" file you can finally run
 
 	./flickerize.sh
 
-knows bugs
- * no space in every path
- * 

@@ -26,7 +26,8 @@ OK=0;				#everuthing is ok!
 
 DEBUG=0				#DebugInfo: = 1 to print debug info
 
-TOUPF="/home/caccola/Scrivania"		#Resized photo destination folder (this folder must be exist)
+#TODO check if $HOME exists
+TOUPF="$HOME/flickrize"		#Resized photo destination folder (this folder must be exist)
 
 ###############		Param Parser		######################
 for param in $@; do
@@ -92,8 +93,11 @@ cp $SOURCE $DEST
 mogrify -geometry 1280 $DEST
 #End Resize photo
 
-#TODO check if $TOUPF exist
 #Move resized photo to toUpload folder
+if [ ! -d ${TOUPF} ]
+then
+	mkdir ${TOUPF}
+fi
 mv $DEST $TOUPF/$RDEST
 echo "\tFile stored to $TOUPF/$RDEST"
 #backup photo to signed/$TITLE

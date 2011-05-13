@@ -1,22 +1,29 @@
 TODO - List of things to add
 	* create conf file for settings
-	* use "cut" to generate file name
+	* use "cut" and "sed" to generate file name
+	* parse path, so can use space and other cars
 	
 	
 -- addSignature.sh --
-	* sign photo									- DONE
-	* check if file exist							- TODO
-	* generalize on file renaming					- TODO
-	* photo orientation (oriz or vert)				- TODO
-	* auto reconize photo size						- DONE
-	* resize sign to check photo size				- DONE
-	* Control if more then 1 photo is passed		- TODO
-	* Parsing parameters							- DONE
-	* Generalize on sign file						- TODO
-	* Redirect error to log file					- TODO
+	* sign photo									- done
+	* check if file exist							+ TODO
+	* generalize on file renaming					+ TODO
+	* photo orientation (oriz or vert)				+ TODO
+	* auto reconize photo size						- done
+	* resize sign to check photo size				- done
+	* Control if more then 1 photo is passed		+ TODO
+	* Parsing parameters							- done
+	* Generalize on sign file						+ TODO
+	* Redirect error to log file					+ TODO
 	* Sign resize percent must be free from
-		photo and sign dimension					- TODO
+		photo and sign dimension					+ TODO
 
 -- toFlickr.sh --
+	* catch mv error								+ TODO
+	* check if $HOME exists							+ TODO
 
 -- flickrize.sh --
+
+-- knows bugs --
+ * no space in every path
+ * 
