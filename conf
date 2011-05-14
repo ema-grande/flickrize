@@ -1,8 +1,10 @@
-### Signature section ###
-
+## Signature section ##
 WHITESIGN=firma2_w.png
 BLACKSIGN=firma2_b.png
 
 ## Resized photo folder section ###
-
 RESPHOTOF=/home/caccola/flickrize
+
+## Source photo file ##
+SOURCE=upload.txt
+

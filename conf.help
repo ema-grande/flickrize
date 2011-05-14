@@ -1,10 +1,10 @@
-### Signature section ###
-
-WHITESIGN=					# path of white signature
-BLACKSIGN=					# path of black signature
-
-# for a better rendering sing file dimension can be 1000x200 px
+## Signature section ##
+WHITESIGN					# path of white signature
+BLACKSIGN					# path of black signature
 
 ## Resized photo folder section ###
+RESPHOTOF					# path of resized photo folder
 
-RESPHOTOF=					# path of resized photo folder
+## Source photo file ##
+SOURCE						# File of photo path (old upload.txt)
+
