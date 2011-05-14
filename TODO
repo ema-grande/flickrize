@@ -31,4 +31,4 @@ TODO - List of things to add
 
 -- knows bugs --
  * no space in every path
- * no new line at the end of file in upload.txt file
+ * no new line is permitted at the end of file in upload.txt file
