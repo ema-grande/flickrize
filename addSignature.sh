@@ -26,9 +26,7 @@ OK=0;				#everuthing is ok!
 
 DEBUG=1				#DebugInfo: = 1 to print debug info
 
-#Sign file #TODO set form conf file
-#WSIGN="firma2_w.png";	#White signature
-#BSIGN="firma2_b.png";	#Black signature
+#Sign file
 WSIGN=$(cat conf | grep WHITESIGN | cut -d= -f2)
 BSIGN=$(cat conf | grep BLACKSIGN | cut -d= -f2)
 
