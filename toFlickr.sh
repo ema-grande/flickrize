@@ -26,8 +26,7 @@ OK=0;				#everuthing is ok!
 
 DEBUG=0				#DebugInfo: = 1 to print debug info
 
-#TODO check if $HOME exists
-#TOUPF="$HOME/flickrize"		#Resized photo destination folder (this folder must be exist)
+#Resized photo destination folder (this folder must be exist)
 TOUPF=$(cat conf | grep RESPHOTOF | cut -d= -f2)
 
 ###############		Param Parser		######################

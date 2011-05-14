@@ -24,7 +24,7 @@ usage ()
 #Error code
 OK=0;				#everuthing is ok!
 
-DEBUG=1				#DebugInfo: = 1 to print debug info
+DEBUG=0				#DebugInfo: = 1 to print debug info
 
 #Sign file
 WSIGN=$(cat conf | grep WHITESIGN | cut -d= -f2)
