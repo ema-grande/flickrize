@@ -27,7 +27,7 @@ OK=0;				#everuthing is ok!
 DEBUG=0				#DebugInfo: = 1 to print debug info
 
 #TODO set from conf file
-TOUPF="$HOME/flickrize"		#Resized photo destination folder (this folder must be exist)
+TOUPF="$HOME/Scrivania/flickrize"		#Resized photo destination folder (this folder must be exist)
 
 ###############		Param Parser		######################
 for param in $@; do
@@ -73,7 +73,7 @@ echo "\tCoping and resizing photo..."
 if [ -z $TITLE ]
 then
 	TITLE=${ORIG##*/}
-	TITLE=${TITLE%*.$EXT}"_sign.$EXT"
+	TITLE=${TITLE%*.$EXT}"_sign"
 else
 	DEST=$PFOLDER/$TITLE.$EXT;
 	RDEST=$TITLE.$EXT;
