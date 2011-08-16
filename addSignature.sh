@@ -152,7 +152,7 @@ fi
 
 ###############		Apply		######################
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
-rm *tmp
+rm *tmp 2> /dev/null
 
 echo "\tPhoto signed output is $DEST";
 
