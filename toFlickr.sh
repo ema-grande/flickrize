@@ -28,6 +28,7 @@ DEBUG=0				#DebugInfo: = 1 to print debug info
 
 #TODO set from conf file
 TOUPF="$HOME/Scrivania/flickrize"		#Resized photo destination folder (this folder must be exist)
+#TOUPF="/media/WD250GBCAC/Foto/flickrize"
 
 ###############		Param Parser		######################
 for param in $@; do
