@@ -3,4 +3,4 @@
 #very basic XD
 
 chmod +x *.sh
-mkdir $(cat conf | grep RESPHOTOF | cut -d= -f2)
+#mkdir $(cat conf | grep RESPHOTOF | cut -d= -f2) 	#useless done by toFlickr.sh
