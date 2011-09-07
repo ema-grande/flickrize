@@ -3,6 +3,7 @@ TODO - List of things to add
 	* use "cut" and "sed" to generate file name
 	* parse path, so can use space and other cars
 	* use XDG to use default home folders
+	* ask before to overwrite any existing file
 	
 -- addSignature.sh --
 	* sign photo									- done
