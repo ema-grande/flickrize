@@ -10,3 +10,6 @@ SOURCE=upload.txt
 
 ## Resize option ##
 RWIDTH=1280
+
+## Debug ##
+DEBUG=1

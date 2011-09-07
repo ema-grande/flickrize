@@ -10,3 +10,6 @@ SOURCE						# File of photo path (old upload.txt)
 
 ## Resize option ##
 RWIDTH						# Set the width of resized destination photo
+
+## Debug ##
+DEBUG						# Set to 1 to display debug info
