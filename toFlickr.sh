@@ -24,7 +24,7 @@ usage ()
 #Error code
 OK=0;				#everuthing is ok!
 
-DEBUG=1				#DebugInfo: = 1 to print debug info
+DEBUG=$(cat conf | grep DEBUG | cut -d= -f2)
 
 #Resized photo destination folder (this folder must be exist)
 TOUPF=$(cat conf | grep RESPHOTOF | cut -d= -f2)
