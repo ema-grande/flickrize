@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #Prepare photo to upload.
 
 ###############		Subfunction		######################

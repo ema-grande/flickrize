@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #Read README file before run this script!
 
 photosourcepath=$(cat conf | grep SOURCE | cut -d= -f2)

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Add signature to the photo.
 # Set $WSIGN and $BSIGN to the sign file path
 
