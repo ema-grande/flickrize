@@ -24,7 +24,7 @@ usage ()
 #Error code
 OK=0;				#everuthing is ok!
 
-DEBUG=0				#DebugInfo: = 1 to print debug info
+DEBUG=$(cat conf | grep DEBUG | cut -d= -f2)
 
 #Sign file
 WSIGN=$(cat conf | grep WHITESIGN | cut -d= -f2)
@@ -139,15 +139,15 @@ case $SPOS in
 esac
 
 if [ $DEBUG -eq 1 ]; then	#Debug info
-	echo "#### DEBUG INFO ####\tOrigin file: $ORIG"
-	echo "#### DEBUG INFO ####\tDestination file: $DEST"
-	echo "#### DEBUG INFO ####\tExtension file: $EXT"
-	echo "#### DEBUG INFO ####\tFile size: $SIZE\t" #$WIDTH x $HEIGHT"
-	echo "#### DEBUG INFO ####\tSign color: $SIGN"
-	echo "#### DEBUG INFO ####\tSign size: $SIGNSIZE\t" #$SWIDTH x $SHEIGHT"
-	echo "#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
-	echo "#### DEBUG INFO ####\tPosizione sign: $SIGNPOS"
-	echo "#### DEBUG INFO ####\tBorder Sign: $BORDER"
+	echo "\t#### DEBUG INFO ####\tOrigin file: $ORIG"
+	echo "\t#### DEBUG INFO ####\tDestination file: $DEST"
+	echo "\t#### DEBUG INFO ####\tExtension file: $EXT"
+	echo "\t#### DEBUG INFO ####\tFile size: $SIZE\t" #$WIDTH x $HEIGHT"
+	echo "\t#### DEBUG INFO ####\tSign color: $SIGN"
+	echo "\t#### DEBUG INFO ####\tSign size: $SIGNSIZE\t" #$SWIDTH x $SHEIGHT"
+	echo "\t#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
+	echo "\t#### DEBUG INFO ####\tPosizione sign: $SIGNPOS"
+	echo "\t#### DEBUG INFO ####\tBorder Sign: $BORDER"
 fi
 
 ###############		Apply		######################
