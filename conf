@@ -3,8 +3,10 @@ WHITESIGN=firma2_w.png
 BLACKSIGN=firma2_b.png
 
 ## Resized photo folder section ###
-RESPHOTOF=/home/$HOME/Scrivania/flickrize
+RESPHOTOF=/home/caccola/Scrivania/flickrize
 
 ## Source photo file ##
 SOURCE=upload.txt
 
+## Resize option ##
+RWIDTH=1280

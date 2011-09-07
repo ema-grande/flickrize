@@ -8,3 +8,5 @@ RESPHOTOF					# path of resized photo folder
 ## Source photo file ##
 SOURCE						# File of photo path (old upload.txt)
 
+## Resize option ##
+RWIDTH						# Set the width of resized destination photo
