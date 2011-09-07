@@ -73,7 +73,7 @@ echo "\tCoping and resizing photo..."
 if [ -z $TITLE ]
 then
 	TITLE=${ORIG##*/}
-	TITLE=${TITLE%*.$EXT}"_sign.$EXT"
+	TITLE=${TITLE%*.$EXT}"_sign"
 else
 	DEST=$PFOLDER/$TITLE.$EXT;
 	RDEST=$TITLE.$EXT;

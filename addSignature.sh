@@ -152,9 +152,7 @@ fi
 
 ###############		Apply		######################
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
-if [ ${PERCENT} -ne 100 ]; then
-	rm $SIGN
-fi
+rm *tmp 2> /dev/null
 
 echo "\tPhoto signed output is $DEST";
 
