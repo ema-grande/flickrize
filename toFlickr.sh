@@ -24,7 +24,7 @@ usage ()
 #Error code
 OK=0;				#everuthing is ok!
 
-DEBUG=0				#DebugInfo: = 1 to print debug info
+DEBUG=1				#DebugInfo: = 1 to print debug info
 
 #Resized photo destination folder (this folder must be exist)
 TOUPF=$(cat conf | grep RESPHOTOF | cut -d= -f2)
@@ -89,8 +89,9 @@ then
 	echo "\t#### DEBUG INFO ####\tPFOLDER: $PFOLDER"
 fi
 
+RDWIDTH=$(cat conf | grep RWIDTH | cut -d= -f2) #resize width
 cp $SOURCE $DEST
-mogrify -geometry 1280 $DEST
+mogrify -geometry $RDWIDTH $DEST
 #End Resize photo
 
 #Move resized photo to toUpload folder
