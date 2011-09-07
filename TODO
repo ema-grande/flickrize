@@ -1,9 +1,10 @@
 TODO - List of things to add
-	* create conf file for settings
-	* use "cut" and "sed" to generate file name
-	* parse path, so can use space and other cars
-	* use XDG to use default home folders
-	* ask before to overwrite any existing file
+	* create conf file for settings					- done
+	* use "cut" and "sed" to generate file name		+ TODO
+	* parse path, so can use space and other cars	+ TODO
+	* use XDG to use default home folders			+ TODO
+	* ask before to overwrite any existing file		+ TODO
+	* before perform every action check all condition	+ TODO
 	
 -- addSignature.sh --
 	* sign photo									- done
