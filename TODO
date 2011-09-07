@@ -4,7 +4,6 @@ TODO - List of things to add
 	* parse path, so can use space and other cars
 	* use XDG to use default home folders
 	
-	
 -- addSignature.sh --
 	* sign photo									- done
 	* check if file exist							+ TODO
@@ -31,5 +30,6 @@ TODO - List of things to add
 	  from conf file								+ TODO
 
 -- knows bugs --
+ * when TITLE in "upload.txt" file is equal to the photo filename original photo is overwrite
  * no space in every path
  * no new line is permitted at the end of file in upload.txt file
