@@ -5,6 +5,7 @@ TODO - List of things to add
 	* use XDG to use default home folders			+ TODO
 	* ask before to overwrite any existing file		+ TODO
 	* before perform every action check all condition	+ TODO
+	* GUI (zenity?)
 	
 -- addSignature.sh --
 	* sign photo									- done
