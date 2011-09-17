@@ -5,18 +5,18 @@
 ###############		Subfunction		######################
 usage ()
 {
-	echo "usage: $0 [OPTION]... FILENAME...";
-	echo "\tFILENAME\t\tRelative path of the photo file to folder";
-	echo "\t\t\t\t\t$PWD"
+	echo -e"usage: $0 [OPTION]... FILENAME...";
+	echo -e"\tFILENAME\t\tRelative path of the photo file to folder";
+	echo -e"\t\t\t\t\t$PWD"
 	echo
-	echo "\t--color=COLOR\t\tSet the color of the signature. COLOR can be:";
-	echo "\t\t\t\t\tW -- White sign (default)";
-	echo "\t\t\t\t\tB -- Black sign";
-	echo "\t--pos=POS\t\tWhere to put the signature. POS can be:";
-	echo "\t\t\t\t\tTL -- Top Left";
-	echo "\t\t\t\t\tTR -- Top Right";
-	echo "\t\t\t\t\tBL -- Bottom Left";
-	echo "\t\t\t\t\tBR -- Bottom Right (default)";
+	echo -e"\t--color=COLOR\t\tSet the color of the signature. COLOR can be:";
+	echo -e"\t\t\t\t\tW -- White sign (default)";
+	echo -e"\t\t\t\t\tB -- Black sign";
+	echo -e"\t--pos=POS\t\tWhere to put the signature. POS can be:";
+	echo -e"\t\t\t\t\tTL -- Top Left";
+	echo -e"\t\t\t\t\tTR -- Top Right";
+	echo -e"\t\t\t\t\tBL -- Bottom Left";
+	echo -e"\t\t\t\t\tBR -- Bottom Right (default)";
 
 }
 
@@ -34,7 +34,7 @@ SIGN=$WSIGN;			#Default is white!
 
 ###############		Param Parser		######################
 for param in $@; do
-	#echo "Parametro: $param"
+	#echo -e"Parametro: $param"
 	case ${param} in
 	"-h" | "-help" | "--help" )
 		usage
@@ -43,36 +43,36 @@ for param in $@; do
 		case ${param##*=} in
 		"B" )
 			SIGN="$BSIGN"
-			echo "\tSignature color: black!";;
+			echo -e"\tSignature color: black!";;
 		"W" )
 			SIGN="$WSIGN"
-			echo "\tSignature color: white!";;
+			echo -e"\tSignature color: white!";;
 		* )
-			echo "\tSignature color: bottom right! (Default)";;
+			echo -e"\tSignature color: bottom right! (Default)";;
 		esac;;
 	"--pos="* )
 		case ${param##*=} in
 		"TL" )
 			SPOS="TL"
-			echo "\tSignature position: top left!";;
+			echo -e"\tSignature position: top left!";;
 		"TR" )
 			SPOS="TR"
-			echo "\tSignature position: top right!";;
+			echo -e"\tSignature position: top right!";;
 		"BL" )
 			SPOS="BL"
-			echo "\tSignature position: bottom left!";;
+			echo -e"\tSignature position: bottom left!";;
 		"BR" )
 			SPOS="BR"
-			echo "\tSignature position: bottom right!";;
+			echo -e"\tSignature position: bottom right!";;
 		* )
-			echo "\tSignature position: bottom right! (Default)";;
+			echo -e"\tSignature position: bottom right! (Default)";;
 		esac;;
 	 * )
 	 	if [ -f "$param" ]
 	 	then
 	 	 	ORIG="$param"
 	 	else
-	 		echo "$param is not a file"
+	 		echo -e"$param is not a file"
 	 		usage;
 	 		return $OK;
 	 	fi;;
@@ -139,21 +139,21 @@ case $SPOS in
 esac
 
 if [ $DEBUG -eq 1 ]; then	#Debug info
-	echo "\t#### DEBUG INFO ####\tOrigin file: $ORIG"
-	echo "\t#### DEBUG INFO ####\tDestination file: $DEST"
-	echo "\t#### DEBUG INFO ####\tExtension file: $EXT"
-	echo "\t#### DEBUG INFO ####\tFile size: $SIZE\t" #$WIDTH x $HEIGHT"
-	echo "\t#### DEBUG INFO ####\tSign color: $SIGN"
-	echo "\t#### DEBUG INFO ####\tSign size: $SIGNSIZE\t" #$SWIDTH x $SHEIGHT"
-	echo "\t#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
-	echo "\t#### DEBUG INFO ####\tPosizione sign: $SIGNPOS"
-	echo "\t#### DEBUG INFO ####\tBorder Sign: $BORDER"
+	echo -e"\t#### DEBUG INFO ####\tOrigin file: $ORIG"
+	echo -e"\t#### DEBUG INFO ####\tDestination file: $DEST"
+	echo -e"\t#### DEBUG INFO ####\tExtension file: $EXT"
+	echo -e"\t#### DEBUG INFO ####\tFile size: $SIZE\t" #$WIDTH x $HEIGHT"
+	echo -e"\t#### DEBUG INFO ####\tSign color: $SIGN"
+	echo -e"\t#### DEBUG INFO ####\tSign size: $SIGNSIZE\t" #$SWIDTH x $SHEIGHT"
+	echo -e"\t#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
+	echo -e"\t#### DEBUG INFO ####\tPosizione sign: $SIGNPOS"
+	echo -e"\t#### DEBUG INFO ####\tBorder Sign: $BORDER"
 fi
 
 ###############		Apply		######################
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
 rm *tmp 2> /dev/null
 
-echo "\tPhoto signed output is $DEST";
+echo -e"\tPhoto signed output is $DEST";
 
 exit 0;

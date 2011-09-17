@@ -6,6 +6,7 @@ TODO - List of things to add
 	* ask before to overwrite any existing file		+ TODO
 	* before perform every action check all condition	+ TODO
 	* GUI (zenity?)
+	* fix echo \t output (use echo -e "\t\t")
 	
 -- addSignature.sh --
 	* sign photo									- done
