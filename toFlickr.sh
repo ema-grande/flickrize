@@ -4,19 +4,19 @@
 ###############		Subfunction		######################
 usage ()
 {
-	echo -e"usage: $0 [OPTION]... FILENAME...";
-	echo -e"\tFILENAME\t\tRelative path of the photo file to folder";
-	echo -e"\t\t\t\t\t$PWD"
+	echo -e "usage: $0 [OPTION]... FILENAME...";
+	echo -e "\tFILENAME\t\tRelative path of the photo file to folder";
+	echo -e "\t\t\t\t\t$PWD"
 	echo
-	echo -e"\t--color=COLOR\t\tSet the color of the sign, default is white. COLOR can be:";
-	echo -e"\t\t\t\t\tW -- White sign";
-	echo -e"\t\t\t\t\tB -- Black sign";
-	echo -e"\t--pos=POS\t\tWhere to put the sign, default is BR. POS can be:";
-	echo -e"\t\t\t\t\tTL -- (Top Left)";
-	echo -e"\t\t\t\t\tTR -- (Top Right)";
-	echo -e"\t\t\t\t\tBL -- (Bottom Left)";
-	echo -e"\t\t\t\t\tBR -- (Bottom Right)";
-	echo -e"\t--title=TITLE\t\tSet TITLE of the photo. Will be the file name!";
+	echo -e "\t--color=COLOR\t\tSet the color of the sign, default is white. COLOR can be:";
+	echo -e "\t\t\t\t\tW -- White sign";
+	echo -e "\t\t\t\t\tB -- Black sign";
+	echo -e "\t--pos=POS\t\tWhere to put the sign, default is BR. POS can be:";
+	echo -e "\t\t\t\t\tTL -- (Top Left)";
+	echo -e "\t\t\t\t\tTR -- (Top Right)";
+	echo -e "\t\t\t\t\tBL -- (Bottom Left)";
+	echo -e "\t\t\t\t\tBR -- (Bottom Right)";
+	echo -e "\t--title=TITLE\t\tSet TITLE of the photo. Will be the file name!";
 
 }
 
@@ -46,7 +46,7 @@ for param in $@; do
 	 	then
 	 	 	ORIG="$param"
 	 	else
-	 		echo -e"$param is not a file"
+	 		echo -e "$param is not a file"
 	 		usage;
 	 		return $OK;
 	 	fi;;
@@ -58,7 +58,7 @@ if [ "$ORIG" = "" ]; then
 	return $OK;
 fi
 
-echo -e"Processing photo $ORIG"
+echo -e "Processing photo $ORIG"
 ./addSignature.sh --color=$COLOR --pos=$POS $ORIG		#Sign photo with addSignature.sh script
 
 #Resize photo
@@ -69,7 +69,7 @@ DEST=${ORIG%*.$EXT}"_sign_resized."$EXT	#Destination signed file
 RDEST=${DEST##*/}						#Photo name
 PFOLDER=$(dirname $DEST);				#Photo folder
 
-echo -e"\tCoping and resizing photo..."
+echo -e "\tCoping and resizing photo..."
 if [ -z $TITLE ]
 then
 	TITLE=${ORIG##*/}
@@ -81,12 +81,12 @@ fi
 
 if [ $DEBUG -eq 1 ]
 then
-	echo -e"\t#### DEBUG INFO ####\tOrigin file: $ORIG"
-	echo -e"\t#### DEBUG INFO ####\tTitle: $TITLE"
-	echo -e"\t#### DEBUG INFO ####\tSOURCE: $SOURCE"
-	echo -e"\t#### DEBUG INFO ####\tDEST: $DEST"
-	echo -e"\t#### DEBUG INFO ####\tRDEST: $RDEST"
-	echo -e"\t#### DEBUG INFO ####\tPFOLDER: $PFOLDER"
+	echo -e "\t#### DEBUG INFO ####\tOrigin file: $ORIG"
+	echo -e "\t#### DEBUG INFO ####\tTitle: $TITLE"
+	echo -e "\t#### DEBUG INFO ####\tSOURCE: $SOURCE"
+	echo -e "\t#### DEBUG INFO ####\tDEST: $DEST"
+	echo -e "\t#### DEBUG INFO ####\tRDEST: $RDEST"
+	echo -e "\t#### DEBUG INFO ####\tPFOLDER: $PFOLDER"
 fi
 
 RDWIDTH=$(cat conf | grep RWIDTH | cut -d= -f2) #resize width
@@ -100,11 +100,11 @@ then
 	mkdir ${TOUPF}
 fi
 mv $DEST $TOUPF/$RDEST
-echo -e"\tFile stored to $TOUPF/$RDEST"
+echo -e "\tFile stored to $TOUPF/$RDEST"
 #backup photo to signed/$TITLE
 mkdir $PFOLDER/signed 2> /dev/null
 mv $SOURCE $PFOLDER/signed/$TITLE.$EXT
-echo -e"Processing photo $ORIG Done!"
+echo -e "Processing photo $ORIG Done!"
 
 exit
 
