@@ -34,7 +34,7 @@ for param in $@; do
 	case ${param} in
 	"-h" | "-help" | "--help" )
 		usage;
-		return $OK;;
+		exit $OK;;
 	"--color="* )		#Catch sign color
 		COLOR=${param##*=};;
 	"--pos="* )			#Catch sign position
@@ -48,41 +48,44 @@ for param in $@; do
 	 	else
 	 		echo -e "$param is not a file"
 	 		usage;
-	 		return $OK;
+	 		exit $OK;
 	 	fi;;
 	esac
 done
 
 if [ "$ORIG" = "" ]; then
 	usage;
-	return $OK;
+	exit $OK;
 fi
 
 echo -e "Processing photo $ORIG"
 ./addSignature.sh --color=$COLOR --pos=$POS $ORIG		#Sign photo with addSignature.sh script
 
 #Resize photo
-EXT=${ORIG##*.};
-SOURCE=${ORIG%*.$EXT}"_sign.$EXT";		#Source signed file
+SOURCE=`echo $ORIG | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign&/g'`;
 #Output file
-DEST=${ORIG%*.$EXT}"_sign_resized."$EXT	#Destination signed file
-RDEST=${DEST##*/}						#Photo name
-PFOLDER=$(dirname $DEST);				#Photo folder
+DEST=`echo $ORIG | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign_resized&/g'`	#Destination signed file
+RDEST=`basename "$DEST"`				#Photo name
+PFOLDER=`dirname "$DEST"`;				#Photo folder
 
 echo -e "\tCoping and resizing photo..."
 if [ -z $TITLE ]
 then
-	TITLE=${ORIG##*/}
-	TITLE=${TITLE%*.$EXT}"_sign"
+	echo "titolo no"
+	TITLE=`basename "$ORIG"`
+	TITLE=`echo $TITLE | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign&/g'`;
 else
-	DEST=$PFOLDER/$TITLE.$EXT;
-	RDEST=$TITLE.$EXT;
+	echo "titolo si"
+	TITLE=$TITLE`echo $ORIG | sed -e 's/^\(.*\)\.//g'`;
+	DEST=$PFOLDER/$TITLE;
+	RDEST=$TITLE;
 fi
 
 if [ $DEBUG -eq 1 ]
 then
 	echo -e "\t#### DEBUG INFO ####\tOrigin file: $ORIG"
 	echo -e "\t#### DEBUG INFO ####\tTitle: $TITLE"
+	echo -e "\t#### DEBUG INFO ####\tOrigin extension: $EXT"
 	echo -e "\t#### DEBUG INFO ####\tSOURCE: $SOURCE"
 	echo -e "\t#### DEBUG INFO ####\tDEST: $DEST"
 	echo -e "\t#### DEBUG INFO ####\tRDEST: $RDEST"
@@ -103,7 +106,7 @@ mv $DEST $TOUPF/$RDEST
 echo -e "\tFile stored to $TOUPF/$RDEST"
 #backup photo to signed/$TITLE
 mkdir $PFOLDER/signed 2> /dev/null
-mv $SOURCE $PFOLDER/signed/$TITLE.$EXT
+mv $SOURCE $PFOLDER/signed/$TITLE
 echo -e "Processing photo $ORIG Done!"
 
 exit
