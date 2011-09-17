@@ -5,8 +5,9 @@ TODO - List of things to add
 	* use XDG to use default home folders			+ TODO
 	* ask before to overwrite any existing file		+ TODO
 	* before perform every action check all condition	+ TODO
-	* GUI (zenity?)
-	* fix echo \t output (use echo -e "\t\t")
+	* GUI (zenity?)									+ TODO
+	* suppress exiv2 error							+ TODO
+	* redirect all error to a log file				+ TODO
 	
 -- addSignature.sh --
 	* sign photo									- done
