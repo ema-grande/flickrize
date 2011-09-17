@@ -38,7 +38,7 @@ for param in $@; do
 	case ${param} in
 	"-h" | "-help" | "--help" )
 		usage
-		return $OK;;
+		exit $OK;;
 	"--color="* )		#Catch sign color
 		case ${param##*=} in
 		"B" )
@@ -74,27 +74,25 @@ for param in $@; do
 	 	else
 	 		echo -e "$param is not a file"
 	 		usage;
-	 		return $OK;
+	 		exit $OK;
 	 	fi;;
 	esac
 done
 
 if [ -z $ORIG ]; then
 	usage;
-	return $OK;
+	exit $OK;
 fi
 
 ###############		Variables		######################
 #Output file #TODO set from conf file
-EXT=${ORIG##*.};
-DEST=${ORIG%*.$EXT}"_sign.$EXT";
+DEST=`echo $ORIG | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign&/g'`
 
 ###############		Image and sign size		######################
 #Calculate image size
-SIZE=$(exiv2 $ORIG | grep -i "image size") 2> /dev/null;
-SIZE=${SIZE#*:*};
-HEIGHT=${SIZE#*x*};
-WIDTH=${SIZE%*x*};
+SIZE=`exiv2 $ORIG | grep -i "image size" | cut -d: -f2`;
+WIDTH=`echo $SIZE | cut -dx -f1`;
+HEIGHT=`echo $SIZE | cut -dx -f2`;
 
 #Resize sign file #TODO change this, generalize on photo dimensions
 : $((PERCENT = $WIDTH * 100 / 4288 ))	#firma.png must be 1000x200px
@@ -107,10 +105,9 @@ if [ ${PERCENT} -ne 100 ]; then
 fi
 
 #Calculate sign size for better positioning
-SIGNSIZE=$(exiv2 $SIGN | grep -i "image size") 2> /dev/null;
-SIGNSIZE=${SIGNSIZE#*:*};
-SHEIGHT=${SIGNSIZE#*x*};
-SWIDTH=${SIGNSIZE%*x*};
+SIGNSIZE=`exiv2 $SIGN | grep -i "image size" | cut -d: -f2` 2> /dev/null;
+SWIDTH=`echo $SIGNSIZE | cut -dx -f1`;
+SHEIGHT=`echo $SIGNSIZE | cut -dx -f2`;
 
 #Calculate sign position #TODO generalize on photo dimension
 : $((BORDER = $WIDTH * 20 / 4288 ))
@@ -121,7 +118,7 @@ SWIDTH=${SIGNSIZE%*x*};
 TL="+$BORDER+$BORDER";		#TOP LEFT
 TR="+$XPOS+$BORDER";		#TOP RIGHT
 BL="+$BORDER+$YPOS";		#BOTTOM LEFT
-BR="+$XPOS+$YPOS";	#BOTTOM RIGHT
+BR="+$XPOS+$YPOS";			#BOTTOM RIGHT
 
 #Default is BR
 SIGNPOS="$BR";
@@ -142,9 +139,9 @@ if [ $DEBUG -eq 1 ]; then	#Debug info
 	echo -e "\t#### DEBUG INFO ####\tOrigin file: $ORIG"
 	echo -e "\t#### DEBUG INFO ####\tDestination file: $DEST"
 	echo -e "\t#### DEBUG INFO ####\tExtension file: $EXT"
-	echo -e "\t#### DEBUG INFO ####\tFile size: $SIZE\t" #$WIDTH x $HEIGHT"
+	echo -e "\t#### DEBUG INFO ####\tFile size: $SIZE" #\t$WIDTH x $HEIGHT"
 	echo -e "\t#### DEBUG INFO ####\tSign color: $SIGN"
-	echo -e "\t#### DEBUG INFO ####\tSign size: $SIGNSIZE\t" #$SWIDTH x $SHEIGHT"
+	echo -e "\t#### DEBUG INFO ####\tSign size: $SIGNSIZE \t$SWIDTH x $SHEIGHT"
 	echo -e "\t#### DEBUG INFO ####\tPercentuale di ridimensionamento:" $PERCENT"%"
 	echo -e "\t#### DEBUG INFO ####\tPosizione sign: $SIGNPOS"
 	echo -e "\t#### DEBUG INFO ####\tBorder Sign: $BORDER"
