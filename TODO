@@ -8,6 +8,7 @@ TODO - List of things to add
 	* GUI (zenity?)									+ TODO
 	* suppress exiv2 error							+ TODO
 	* redirect all error to a log file				+ TODO
+	* refactoring vars name
 	
 -- addSignature.sh --
 	* sign photo									- done
