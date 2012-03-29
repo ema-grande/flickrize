@@ -12,4 +12,4 @@ SOURCE=upload.txt
 RWIDTH=1280
 
 ## Debug ##
-DEBUG=1
+DEBUG=0

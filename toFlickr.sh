@@ -76,7 +76,7 @@ then
 	TITLE=`echo $TITLE | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign&/g'`;
 else
 	echo "titolo si"
-	TITLE=$TITLE`echo $ORIG | sed -e 's/^\(.*\)\.//g'`;
+	TITLE=$TITLE`echo $ORIG | sed -e 's/^\(.*\)\./\./g'`;
 	DEST=$PFOLDER/$TITLE;
 	RDEST=$TITLE;
 fi
