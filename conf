@@ -1,6 +1,6 @@
 ## Signature section ##
-WHITESIGN=firma2_w.png
-BLACKSIGN=firma2_b.png
+WHITESIGN=sign/firma_w.png
+BLACKSIGN=sign/firma_b.png
 
 ## Resized photo folder section ###
 RESPHOTOF=/home/caccola/Scrivania/flickrize
@@ -9,6 +9,7 @@ RESPHOTOF=/home/caccola/Scrivania/flickrize
 SOURCE=upload.txt
 
 ## Resize option ##
+RESIZE=0
 RWIDTH=1280
 
 ## Debug ##

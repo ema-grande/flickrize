@@ -1,41 +1,43 @@
-TODO - List of things to add
-	* create conf file for settings					- done
-	* use "cut" and "sed" to generate file name		+ TODO
-	* parse path, so can use space and other cars	+ TODO
-	* use XDG to use default home folders			+ TODO
-	* ask before to overwrite any existing file		+ TODO
-	* before perform every action check all condition	+ TODO
-	* GUI (zenity?)									+ TODO
-	* suppress exiv2 error							+ TODO
-	* redirect all error to a log file				+ TODO
-	* refactoring vars name
-	
--- addSignature.sh --
-	* sign photo									- done
-	* check if file exist							+ TODO
-	* generalize on file renaming					+ TODO
-	* photo orientation (oriz or vert)				+ TODO
-	* auto reconize photo size						- done
-	* resize sign to check photo size				- done
-	* Control if more then 1 photo is passed		+ TODO
-	* Parsing parameters							- done
-	* Generalize on sign file						+ TODO
-	* Redirect error to log file					+ TODO
-	* Sign resize percent must be free from
-		photo and sign dimension					+ TODO
-
--- toFlickr.sh --
-	* catch mv error								+ TODO
-	* check if $HOME exists							+ TODO
-
--- flickrize.sh --
-
--- install.sh --
-	* obtian path of install.sh folder				+ TODO
-	* create resize photo destination folder
-	  from conf file								+ TODO
-
 -- knows bugs --
  * when TITLE in "upload.txt" file is equal to the photo filename original photo is overwrite
  * no space in every path
  * no new line is permitted at the end of file in upload.txt file
+
+
+TODO List
+	* create conf file for settings				- done
+	* use "cut" and "sed" to generate file name		+ TODO
+	* parse path, so can use space and other cars		+ TODO
+	* use XDG to use default home folders			+ TODO
+	* ask before to overwrite any existing file		+ TODO
+	* before perform every action check all condition	+ TODO
+	* GUI (zenity?)						+ TODO
+	* suppress exiv2 error					+ TODO
+	* redirect all error to a log file			+ TODO
+	* refactoring vars name					+ TODO
+	* use of $VARS in conf file				+ TODO
+	
+-- addSignature.sh --
+	* sign photo						- done
+	* check if file exist					+ TODO
+	* generalize on file renaming				+ TODO
+	* photo orientation (oriz or vert)			+ TODO
+	* auto reconize photo size				- done
+	* resize sign to check photo size			- done
+	* Control if more then 1 photo is passed		+ TODO
+	* Parsing parameters					- done
+	* Generalize on sign file				+ TODO
+	* Redirect error to log file				+ TODO
+	* Sign resize percent must be free from
+		photo and sign dimension			+ TODO
+
+-- toFlickr.sh --
+	* catch mv error					+ TODO
+	* check if $HOME exists					+ TODO
+
+-- flickrize.sh --
+
+-- install.sh --
+	* obtian path of install.sh folder			+ TODO
+	* create resize photo destination folder
+	  from conf file					+ TODO

@@ -92,6 +92,12 @@ then
 	echo -e "\t#### DEBUG INFO ####\tPFOLDER: $PFOLDER"
 fi
 
+#Resize the photo?
+RESIZE=$(cat conf | grep RESIZE | cut -d= -f2)
+if [ $RESIZE -eq 1 ]
+then
+	# Resize photo
+
 RDWIDTH=$(cat conf | grep RWIDTH | cut -d= -f2) #resize width
 cp $SOURCE $DEST
 mogrify -geometry $RDWIDTH $DEST
@@ -104,6 +110,8 @@ then
 fi
 mv $DEST $TOUPF/$RDEST
 echo -e "\tFile stored to $TOUPF/$RDEST"
+fi #end resize if
+
 #backup photo to signed/$TITLE
 mkdir $PFOLDER/signed 2> /dev/null
 mv $SOURCE $PFOLDER/signed/$TITLE
