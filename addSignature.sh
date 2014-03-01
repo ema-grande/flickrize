@@ -6,17 +6,17 @@
 usage ()
 {
 	echo -e "usage: $0 [OPTION]... FILENAME...";
-	echo -e "\tFILENAME\t\tRelative path of the photo file to folder";
-	echo -e "\t\t\t\t\t$PWD"
+	echo -e "	FILENAME		Relative path of the photo file to folder";
+	echo -e "					$PWD"
 	echo
-	echo -e "\t--color=COLOR\t\tSet the color of the signature. COLOR can be:";
-	echo -e "\t\t\t\t\tW -- White sign (default)";
-	echo -e "\t\t\t\t\tB -- Black sign";
-	echo -e "\t--pos=POS\t\tWhere to put the signature. POS can be:";
-	echo -e "\t\t\t\t\tTL -- Top Left";
-	echo -e "\t\t\t\t\tTR -- Top Right";
-	echo -e "\t\t\t\t\tBL -- Bottom Left";
-	echo -e "\t\t\t\t\tBR -- Bottom Right (default)";
+	echo -e "	--color=COLOR		Set the color of the signature. COLOR can be:";
+	echo -e "					W -- White sign (default)";
+	echo -e "					B -- Black sign";
+	echo -e "	--pos=POS		Where to put the signature. POS can be:";
+	echo -e "					TL -- Top Left";
+	echo -e "					TR -- Top Right";
+	echo -e "					BL -- Bottom Left";
+	echo -e "					BR -- Bottom Right (default)";
 
 }
 
@@ -33,42 +33,44 @@ BSIGN=$(cat conf | grep BLACKSIGN | cut -d= -f2)
 SIGN=$WSIGN;			#Default is white!
 
 ###############		Param Parser		######################
+# TODO: some control on params
+#[ $# -ne 3 ] && usage && exit; # TODO: $PARAM_ERROR
 for param in $@; do
 	#echo -e "Parametro: $param"
 	case ${param} in
 	"-h" | "-help" | "--help" )
 		usage
 		exit $OK;;
-	"--color="* )		#Catch sign color
+	"--color="* | "-c="* )		#Catch sign color
 		case ${param##*=} in
-		"B" )
+		"B" | "b" | "BLACK" | "black")
 			SIGN="$BSIGN"
 			echo -e "\tSignature color: black!";;
-		"W" )
+		"W" | "w" | "white" | "WHITE")
 			SIGN="$WSIGN"
 			echo -e "\tSignature color: white!";;
 		* )
-			echo -e "\tSignature color: bottom right! (Default)";;
+			echo -e "\tSignature color: white! (Default)";;
 		esac;;
-	"--pos="* )
+	"--pos="* | "-p="* )
 		case ${param##*=} in
-		"TL" )
+		"TL" | "tl")
 			SPOS="TL"
 			echo -e "\tSignature position: top left!";;
-		"TR" )
+		"TR" | "tr" )
 			SPOS="TR"
 			echo -e "\tSignature position: top right!";;
-		"BL" )
+		"BL" | "bl" )
 			SPOS="BL"
 			echo -e "\tSignature position: bottom left!";;
-		"BR" )
+		"BR" | "br")
 			SPOS="BR"
 			echo -e "\tSignature position: bottom right!";;
 		* )
 			echo -e "\tSignature position: bottom right! (Default)";;
 		esac;;
 	 * )
-	 	if [ -f "$param" ]
+	 	if [ -f "$param" ] #TODO: Check if there is 3 param
 	 	then
 	 	 	ORIG="$param"
 	 	else
@@ -85,7 +87,8 @@ if [ -z $ORIG ]; then
 fi
 
 ###############		Variables		######################
-#Output file #TODO set from conf file
+#Output file 
+#TODO: set from conf file
 DEST=`echo $ORIG | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign&/g'`
 
 ###############		Image and sign size		######################
@@ -94,7 +97,7 @@ SIZE=`exiv2 $ORIG | grep -i "image size" | cut -d: -f2`;
 WIDTH=`echo $SIZE | cut -dx -f1`;
 HEIGHT=`echo $SIZE | cut -dx -f2`;
 
-#Resize sign file #TODO change this, generalize on photo dimensions
+#Resize sign file #TODO: change this, generalize on photo dimensions
 : $((PERCENT = $WIDTH * 100 / 4288 ))	#firma.png must be 1000x200px
 
 #Prepare sign file
@@ -109,7 +112,7 @@ SIGNSIZE=`exiv2 $SIGN | grep -i "image size" | cut -d: -f2` 2> /dev/null;
 SWIDTH=`echo $SIGNSIZE | cut -dx -f1`;
 SHEIGHT=`echo $SIGNSIZE | cut -dx -f2`;
 
-#Calculate sign position #TODO generalize on photo dimension
+#Calculate sign position #TODO: generalize on photo dimension
 : $((BORDER = $WIDTH * 20 / 4288 ))
 : $((XPOS = $WIDTH - $SWIDTH - $BORDER)); # = Photo xSize - ($SIGN Width + 20)
 : $((YPOS = $HEIGHT - $SHEIGHT - $BORDER)); # = Photo ySize - ($SIGN Height + 20)
