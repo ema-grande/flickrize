@@ -45,29 +45,29 @@ for param in $@; do
 		case ${param##*=} in
 		"B" | "b" | "BLACK" | "black")
 			SIGN="$BSIGN"
-			echo -e "\tSignature color: black!";;
+			echo -e " Signature color: black!";;
 		"W" | "w" | "white" | "WHITE")
 			SIGN="$WSIGN"
-			echo -e "\tSignature color: white!";;
+			echo -e " Signature color: white!";;
 		* )
-			echo -e "\tSignature color: white! (Default)";;
+			echo -e " Signature color: white! (Default)";;
 		esac;;
 	"--pos="* | "-p="* )
 		case ${param##*=} in
 		"TL" | "tl")
 			SPOS="TL"
-			echo -e "\tSignature position: top left!";;
+			echo -e " Signature position: top left!";;
 		"TR" | "tr" )
 			SPOS="TR"
-			echo -e "\tSignature position: top right!";;
+			echo -e " Signature position: top right!";;
 		"BL" | "bl" )
 			SPOS="BL"
-			echo -e "\tSignature position: bottom left!";;
+			echo -e " Signature position: bottom left!";;
 		"BR" | "br")
 			SPOS="BR"
-			echo -e "\tSignature position: bottom right!";;
+			echo -e " Signature position: bottom right!";;
 		* )
-			echo -e "\tSignature position: bottom right! (Default)";;
+			echo -e " Signature position: bottom right! (Default)";;
 		esac;;
 	 * )
 	 	if [ -f "$param" ] #TODO: Check if there is 3 param
