@@ -93,7 +93,7 @@ DEST=`echo $ORIG | sed -e 's/\.[a-zA-Z0-9]\{3\}/_sign&/g'`
 
 ###############		Image and sign size		######################
 #Calculate image size
-SIZE=`exiv2 $ORIG | grep -i "image size" | cut -d: -f2`;
+SIZE=`exiv2 $ORIG 2> /dev/null | grep -i "image size" | cut -d: -f2`;
 WIDTH=`echo $SIZE | cut -dx -f1`;
 HEIGHT=`echo $SIZE | cut -dx -f2`;
 
@@ -108,7 +108,7 @@ if [ ${PERCENT} -ne 100 ]; then
 fi
 
 #Calculate sign size for better positioning
-SIGNSIZE=`exiv2 $SIGN | grep -i "image size" | cut -d: -f2` 2> /dev/null;
+SIGNSIZE=`exiv2 $SIGN 2> /dev/null | grep -i "image size" | cut -d: -f2`;
 SWIDTH=`echo $SIGNSIZE | cut -dx -f1`;
 SHEIGHT=`echo $SIGNSIZE | cut -dx -f2`;
 
@@ -154,6 +154,6 @@ fi
 composite -geometry $SIGNPOS $SIGN $ORIG $DEST;
 rm *tmp 2> /dev/null
 
-echo -e "\tPhoto signed output is $DEST";
+echo -e " Photo signed output is $DEST";
 
 exit 0;
