@@ -1,6 +1,6 @@
 ## Signature section ##
-WHITESIGN=sign/firma_w.png
-BLACKSIGN=sign/firma_b.png
+WHITESIGN=sign/firma2014_w.png
+BLACKSIGN=sign/firma2014_b.png
 
 ## Resized photo folder section ###
 RESPHOTOF=/home/caccola/Scrivania/flickrize
